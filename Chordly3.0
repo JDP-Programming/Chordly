@@ -214,3 +214,5 @@ function bang () {
 	var romanNumeralList = generateChordList(); // gets the list
 	outlet (0, romanNumeralList); // Sends list
 }
+
+//Hi, John!!
