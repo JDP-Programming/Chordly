@@ -1,5 +1,49 @@
 
 
+function chordPrevention (prevChord, newChord) { //Rules!
+	
+	if (prevChord === newChord) {
+		return true;
+	}
+	
+	 if (newChord === "I" && prevChord === "ii") {
+		return true; // No I to ii!!
+	}
+	
+	if (newChord === "I" && (prevChord === "IV" || prevChord === "IV6" || prevChord === "ii6" || prevChord === "ii6/5")) {
+		return false; // Other predoms are cool after I
+	} 
+	
+	if ((newChord === "V" || newChord === "V6") && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" ||prevChord === "V4/2")) {
+		return true; // V7 to V is not allowed!
+	}
+		
+	 if (newChord === "ii" && prevChord === "ii7") {
+		return true; //No triad after 7th
+	}
+	
+	if (newChord === "ii6" && prevChord === "ii6/5") {
+		return true; //No triad after 7th
+	}
+	
+	if (newChord === "ii" && prevChord === "ii6/5") {
+		return true; //No triad after 7th
+	}
+	
+	if (newChord === "vii°6" && (prevChord === "viiø7" ||prevChord === "viiø6/5" || prevChord === "viiø4/3" || prevChord === "viiø4/2")) {
+		return true; //No triad after 7th
+	}
+	
+	if ((newChord === "IV" || newChord === "ii6" || newChord === "ii6/5") && (prevChord === "viiø7" || prevChord === "V6/5")) {
+		return true; //Prevent tritones in bass	
+	
+		//Move This function later on, remove from generatechordlist
+		
+
+	}
+	return false;
+}
+
 function generateChordList() {
 //This defines the function
 	var chordList = [];
@@ -37,7 +81,7 @@ function generateChordList() {
 
 		chordList.push(chordNumber);
 		
-	}
+	} //1 open
 		
 	var randomNum = Math.random();
 	var finalCadence;
@@ -53,7 +97,7 @@ function generateChordList() {
 	if (finalCadence[0] === 1 && chordList[5] === 2) {
 		finalCadence = [2,0];
 	}
-		//Still ensures 1 does not follow 2 for the 6th and 7th chords
+		//Still ensures 1 does not follow 2 for the 6th and 7th chords 
 		
 	if (chordList[4] === 2 && chordList[5] === 2) {
     finalCadence = [1, 0];  // Avoids Authentic cadence if chords 5 and 6 are both a dominant chord.
@@ -65,7 +109,7 @@ function generateChordList() {
 	}
 		//Ensures the same number is not three times in a row.
 		
-
+	// 1 open
 	
 	chordList = chordList.concat(finalCadence);
 	//concat - combines the two arrays
@@ -80,8 +124,8 @@ function generateChordList() {
 	var chordOptions = {
 		0: ["I", "I6", "iii", "vi"],
 		1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
-		2: ["V", "V7", "vii06", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
-	};
+		2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
+	}; //1 open
 	
 	var romanNumeralList = [];
 	
@@ -93,7 +137,7 @@ function generateChordList() {
 		if (i === 0) {
 			chosenRoman = "I"; // First chord is always root position tonic
 			
-		} else if (i === chordList.length -1) { 
+		} else if (i === chordList.length -1) { //Chooses the final chord
 			
 			if (num === 0 ) {
 			 	chosenRoman = Math.random() < 0.5 ? "I" : "I6"; // 50/50 of chord
@@ -102,8 +146,10 @@ function generateChordList() {
 				chosenRoman = "V"; 	//Final chord logic
 				
 			} else {
-				chosenRoman = options[Math.floor(Math.random() * options.length)];
-			}
+				do {
+					chosenRoman = options[Math.floor(Math.random() * options.length)]; //Logic for other chords
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
+		}
 		} else if (i === 5) {
 			if (num === 0) {
 				var filteredOptions = [];
@@ -112,39 +158,47 @@ function generateChordList() {
 						filteredOptions.push(options[j]);
 					}
 				}
-				chosenRoman = Math.random() < 0.3 ? "Cad6/4" : filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
+				do {
+					chosenRoman = Math.random() < 0.3 ? "Cad6/4" : filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			} else {
-				chosenRoman = options[Math.floor(Math.random() * options.length)];
-				// Makes Cad6/4 appear only at the 6th chord
+				do {
+					chosenRoman = options[Math.floor(Math.random() * options.length)];
+					// Makes Cad6/4 appear only at the 6th chord
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			}
-		} else {
-			if (i === chordList.length - 2 && finalCadence [0] === 1) {
-				chosenRoman = "IV"; //Ensures Plagal if penultimate is 1
+			} else if (i === chordList.length - 2 && finalCadence [0] === 1) {
+				do {
+					chosenRoman = "IV"; //Ensures Plagal if penultimate is 1
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 				
 			} else if (i === chordList.length - 2 && finalCadence[0] === 2) {
-				var dominantChords = ["V", "V7", "V6", "V6/5", "V6/4", "V4/3", "V4/2"];
-				
-				do {
-					
+				var dominantChords = ["V", "V7", "V6", "V6/5", "V4/3", "V4/2"];
+				do {	
 					chosenRoman = dominantChords[Math.floor(Math.random() * dominantChords.length)];
-				} while (chosenRoman === romanNumeralList [i - 1]);
-		} else {		
-			do {
-				chosenRoman = options[Math.floor(Math.random() * options.length)];
-			} while (chosenRoman === romanNumeralList [i - 1]); //Ensures the same chord is twice in a row.
-		}
-	}	
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
+			} else {		
+				do {
+					chosenRoman = options[Math.floor(Math.random() * options.length)];
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); //Ensures the same chord is twice in a row.
+			}
+			
 	// Looking at the second to last chord to ensure a proper cadence
 		romanNumeralList.push(chosenRoman);
 	// Assigns 0, 1 and 2 to chords through map(), teturn line is choosing the specific chord.
 	}
 	
 	if (romanNumeralList[5] == "Cad6/4") {
-		var seventhChord = ["V", "V7", "V4/2"][Math.floor(Math.random() * 3)];
+		var seventhChord;
+		do {
+			seventhChord = ["V", "V7", "V4/2"][Math.floor(Math.random() * 3)];
+		} while (chordPrevention(romanNumeralList[5], seventhChord));
 		//7th chord is V, V7, or V4/2 if Cad6/4 is chosen
 		var eighthChord;
 		if (seventhChord === "V" || seventhChord === "V7") {
+			do {
 			eighthChord = Math.random() < 0.5 ? "I" : "I6";
+			} while (chordPrevention(romanNumeralList[6], eighthChord));
 		} else if (seventhChord === "V4/2") {
 			eighthChord = "I6";
 		}
@@ -154,8 +208,7 @@ function generateChordList() {
 	}
 	
 	return romanNumeralList;
-
-}
+	}
 
 
 //Activate code with a button
