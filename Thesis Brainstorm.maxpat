@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 236.0, 222.0, 903.0, 726.0 ],
+		"rect" : [ 259.0, 169.0, 903.0, 726.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -89,7 +89,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 81.0, 169.0, 1243.0, 743.0 ],
+						"rect" : [ 224.0, 284.0, 1243.0, 743.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -117,7 +117,6 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-8",
@@ -13207,7 +13206,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 540.000016093254089, 196.000005841255188, 436.000012993812561, 42.0 ],
-									"text" : "I IV6 ii V6/5 V7 iii V6 I6"
+									"text" : "I ii6/5 V6/5 viiø4/2 vi I6 IV I6"
 								}
 
 							}
@@ -13221,11 +13220,11 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 812.0, 118.0, 100.0, 49.0 ],
 									"saved_object_attributes" : 									{
-										"filename" : "DictationGenerator2.js",
+										"filename" : "DictationGenerator",
 										"parameter_enable" : 0
 									}
 ,
-									"text" : "js DictationGenerator2"
+									"text" : "js DictationGenerator"
 								}
 
 							}
@@ -14761,8 +14760,8 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "DictationGenerator2.js",
-				"bootpath" : "~/Desktop/THESIS",
+				"name" : "DictationGenerator.js",
+				"bootpath" : "~/Desktop/Chordly-GH",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
