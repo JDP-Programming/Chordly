@@ -5,9 +5,10 @@ outlets = 2;
 	//	1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
 	//	2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
 
-var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, high harm (MIDI 41-84) (Bass MIDI 41-60) (Tenor lowest MIDI 57)
+var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, high harm (MIDI 41-84) (Bass MIDI 41-60), "Tenor" note can be close depending on the bass note
 	
 	"I": [
+		[48, 55, 60, 64],
 		[48, 60, 64, 67],
 		[48, 64, 67, 72],
 		[48, 67, 72, 76],
@@ -17,10 +18,11 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[60, 72, 76, 79],
 		[60, 76, 79, 84],
 		[48, 72, 76, 79],
-		[48, 76, 79, 84],
+		[48, 76, 79, 84]
 	],
 	
 	"I6": [
+		[52, 55, 60, 64],
 		[52, 60, 64, 67],
 		[52, 64, 67, 72],
 		[52, 67, 72, 76],
@@ -41,6 +43,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 		
 	"iii": [
+		[52, 59, 64, 67],
 		[52, 64, 67, 71],
 		[52, 67, 71, 76],
 		[52, 71, 76, 79],
@@ -48,11 +51,11 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[64, 64, 67, 71],
 		[64, 67, 71, 76],
 		[64, 71, 76, 79],
-		[64, 76, 79, 83],
-		[52, 76, 79, 83]
+		[64, 76, 79, 83]
 	],
 		
 	"vi": [
+		[45, 52, 57, 60],
 		[45, 57, 60, 64],
 		[45, 60, 64, 69],
 		[45, 64, 69, 72],
@@ -68,6 +71,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 	
 	"IV": [
+		[53, 60, 65, 69],
 		[53, 65, 69, 72],
 		[53, 69, 72, 77],
 		[53, 72, 77, 81],
@@ -79,6 +83,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"IV6": [
+		[45, 53, 57, 60],
 		[45, 57, 60, 65],
 		[45, 60, 65, 69],
 		[45, 65, 69, 72],
@@ -94,16 +99,23 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 
 	"ii": [
+		[50, 53, 57, 62],
+		[50, 57, 62, 65],
 		[50, 62, 65, 69],
 		[50, 65, 69, 74],
 		[50, 69, 74, 77],
-		[50, 74, 77, 81],
+		[50, 74, 77, 81]
 	],
 
 	"ii6": [
+		[41, 50, 53, 57],
+		[41, 53, 57, 62],
+		[41, 57, 62, 65],
+		[41, 62, 65, 69],
 		[41, 65, 69, 74],
 		[41, 69, 74, 77],
 		[41, 74, 77, 81],
+		[53, 62, 65, 69],
 		[53, 65, 69, 74],
 		[53, 69, 74, 77],
 		[53, 74, 77, 81]
@@ -117,17 +129,21 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[41, 72, 74, 81],
 		[41, 74, 81, 84],
 		[53, 57, 60, 62],
-		[53, 59, 62, 69],
+		[53, 60, 62, 69],
 		[53, 62, 69, 72],
+		[41, 50, 57, 60],
 		[41, 57, 60, 62],
 		[41, 59, 62, 69],
 		[41, 62, 69, 72]
 	],	
 	
 	"V": [
+		[55, 59, 62, 67],
+		[55, 62, 67, 71],
 		[55, 67, 71, 74],
 		[55, 71, 74, 79],
 		[55, 74, 79, 83],
+		[43, 50, 55, 59],
 		[43, 55, 59, 62],
 		[43, 59, 62, 67],
 		[43, 62, 67, 71],
@@ -137,9 +153,12 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"V7": [
+		[55, 59, 62, 65],
+		[55, 62, 65, 71],
 		[55, 65, 71, 74],
 		[55, 71, 74, 77],
 		[55, 74, 77, 83],
+		[43, 50, 53, 59],
 		[43, 53, 59, 62],
 		[43, 59, 62, 65],
 		[43, 62, 65, 71],
@@ -149,6 +168,8 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"V6": [
+		[47, 55, 59, 62],
+		[47, 59, 62, 67],
 		[47, 62, 67, 71],
 		[47, 67, 71, 74],
 		[47, 71, 74, 79],
@@ -161,6 +182,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"vii°6": [
+		[50, 59, 62, 65],
 		[50, 62, 65, 71],
 		[50, 65, 71, 74],
 		[50, 71, 74, 77],
@@ -168,6 +190,8 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"V6/5": [
+		[47, 53, 55, 62],
+		[47, 55, 62, 65],
 		[47, 62, 65, 67],
 		[47, 65, 67, 74],
 		[47, 67, 74, 77],
@@ -175,37 +199,49 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[59, 62, 65, 67],
 		[59, 65, 67, 74],
 		[59, 67, 74, 77],
-		[59, 74, 77, 79]
+		[59, 74, 77, 79],
+		
 		
 	],	
 	
 	"V4/3": [
+		[50, 55, 59, 65],
+		[50, 59, 65, 67],
 		[50, 65, 67, 71],
 		[50, 67, 71, 77],
-		[50, 71, 77, 79]
+		[50, 71, 77, 79],
+		[50, 77, 79, 83]
 	],	
 	
 	"V4/2": [
+		[53, 59, 62, 67],
 		[53, 62, 67, 71],
 		[53, 67, 71, 74],
 		[53, 71, 74, 79],
-		[53, 74, 79, 81],
+		[53, 74, 79, 83],
+		[41, 50, 55, 59],
+		[41, 55, 59, 62],
+		[41, 59, 62, 67],
 		[41, 62, 67, 71],
 		[41, 67, 71, 74],
 		[41, 71, 74, 79],
-		[41, 74, 79, 81]
+		[41, 74, 79, 83]
 	],	
 	
 	"viiø7": [
+		[47, 53, 57, 62],
+		[47, 57, 62, 65],
 		[47, 62, 65, 69],
 		[47, 65, 69, 74],
 		[47, 69, 74, 77],
 		[59, 62, 65, 69],
 		[59, 65, 69, 74],
-		[59, 69, 74, 77]
+		[59, 69, 74, 77],
+		[59, 74, 77, 81]
 	],	
 	
 	"viiø6/5": [
+		[50, 57, 59, 65],
 		[50, 59, 65, 69],
 		[50, 65, 69, 71],
 		[50, 69, 71, 77],
@@ -214,6 +250,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],	
 	
 	"viiø4/3": [
+		[53, 59, 62, 69],
 		[53, 62, 69, 71],
 		[53, 69, 71, 74],
 		[53, 71, 74, 81],
@@ -455,7 +492,62 @@ function generateChordList() {
 
 function assignMIDI(chordList) {
     var midiList = []; 
-	for (var index = 0; index < chordList.length; index++) {//Index is used for numerical placement
+	
+	function hasParallel5thsor8ves(prevVoicing, currentVoicing) {
+		
+		for (var i = 0; i < Math.min(prevVoicing.length, currentVoicing.length); i++) {
+			for (var j = i + 1; j < Math.min(prevVoicing.length, currentVoicing.length); j++) { //This checks each distinct voice pair)
+				var prevInterval = Math.abs(prevVoicing[i] - prevVoicing[j]);
+				var currInterval = Math.abs(currentVoicing[i] - currentVoicing[j]);
+				
+				if (prevVoicing[i] === currentVoicing[i] && prevVoicing[j] === currentVoicing[j]) {
+					continue; //Common tones are allowed
+				}
+				
+				if (prevInterval === 7 && currInterval === 7) {
+						if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) {
+							return true; // No Parallel 5ths!
+						}
+				}
+				
+				if (prevInterval === 12 && currInterval === 12) {
+					if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
+						return true; // No Parallel 8ves!
+					}
+				}
+				if (prevInterval === 19 && currInterval === 19) {
+						if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) {
+							return true; // No Parallel 5ths + 8ve!
+						}
+				}
+				
+				if (prevInterval === 24 && currInterval === 24) {
+					if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
+						return true; // No Parallel 16ths!
+					}
+				}
+			}
+		}
+		return false; //Returns false when there are no parallels :)
+	}
+	
+	function hasVCross(prevVoicing, currentVoicing) {
+		for (var i = 0; i < prevVoicing.length - 1; i++) { //Check each voice
+			
+			if (prevVoicing[i] > prevVoicing[i + 1] && currentVoicing[i] < currentVoicing[i + 1]) { //Detects Voice crossing
+				return true;
+			}
+			
+			if (prevVoicing[i] < prevVoicing[i + 1] && currentVoicing[i] > currentVoicing[i + 1]) { //Detects Voice crossing
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
+
+	for (var index = 0; index < chordList.length; index++) {//Index is used for numerical placement, loops through each chord
 		var chord = chordList[index];
 		
 		if (index === 0 && chord === "I") {
@@ -469,19 +561,21 @@ function assignMIDI(chordList) {
 		}
 		
 		else if (index > 0) { //For the other chords
-			var prevChord = chordList[index - 1]; //Get previous RN
+			//var prevChord = chordList[index - 1]; //Get previous RN
 			var prevVoicing = midiList[index - 1]; //Get previous voicing
-			
 			var currentChordOptions = chordVoicings[chord]; //Get the possible options
 			
 			if (currentChordOptions) { //Calculate the distance between the previous voicing and all potential voicings
+				var validVoicings = currentChordOptions.filter(function(currentVoicing) {
+					return !hasParallel5thsor8ves(prevVoicing, currentVoicing) && //Removes voicings with parallels
+							!hasVCross(prevVoicing, currentVoicing); //Removes voicings that cross
+				});
 				
-				var closestVoicing = currentChordOptions.reduce(function(closest, currentVoicing) { //.reduce is a callaback function
-					
+				var bestVoicing = validVoicings.length > 0 ? validVoicings : currentChordOptions; //"Just in case", if parallels cannot be avoided, use the closest voicing.		
+				
+				var closestVoicing = currentChordOptions.reduce(function(closest, currentVoicing) { //.reduce is a callback function
 					var distance = 0;
-					
 					for (var i = 0; i < Math.min(prevVoicing.length, currentVoicing.length); i++) { //Calculates the distance between all potential options
-						
 						distance += Math.abs(prevVoicing[i] - currentVoicing[i]); //Finds the absolute distance
 					} // If the current voicing is closer, update it!
 					
