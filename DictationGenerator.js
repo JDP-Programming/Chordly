@@ -133,7 +133,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[53, 62, 69, 72],
 		[41, 50, 57, 60],
 		[41, 57, 60, 62],
-		[41, 59, 62, 69],
+		[41, 60, 62, 69],
 		[41, 62, 69, 72]
 	],	
 	
@@ -316,7 +316,10 @@ function chordPrevention (prevChord, newChord) { //Rules!
 	
 	if ((newChord === "IV" || newChord === "ii6" || newChord === "ii6/5") && (prevChord === "viiø7" || prevChord === "V6/5")) {
 		return true; //Prevent tritones in bass	
-	
+		
+	if (newChord === "vii°6" && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" || prevChord === "V4/2")) {
+		return true; //No triad after 7th
+	}
 		//Move This function later on, remove from generatechordlist
 		
 
@@ -505,24 +508,24 @@ function assignMIDI(chordList) {
 				}
 				
 				if (prevInterval === 7 && currInterval === 7) {
-						if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) {
+						if ((prevVoicing[i] !== currentVoicing[i] || prevVoicing[j] !== currentVoicing[j])) {
 							return true; // No Parallel 5ths!
 						}
 				}
 				
 				if (prevInterval === 12 && currInterval === 12) {
-					if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
+					if ((prevVoicing[i] !== currentVoicing[i] || prevVoicing[j] !== currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
 						return true; // No Parallel 8ves!
 					}
 				}
 				if (prevInterval === 19 && currInterval === 19) {
-						if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) {
+						if ((prevVoicing[i] !== currentVoicing[i] || prevVoicing[j] !== currentVoicing[j])) {
 							return true; // No Parallel 5ths + 8ve!
 						}
 				}
 				
 				if (prevInterval === 24 && currInterval === 24) {
-					if (!(prevVoicing[i] === currentVoicing[i] || prevVoicing[j] === currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
+					if ((prevVoicing[i] !== currentVoicing[i] || prevVoicing[j] !== currentVoicing[j])) { //Ensures that if two voices are a 5th or 8ve apart but are common tones, it allows it
 						return true; // No Parallel 16ths!
 					}
 				}
@@ -532,20 +535,49 @@ function assignMIDI(chordList) {
 	}
 	
 	function hasVCross(prevVoicing, currentVoicing) {
-		for (var i = 0; i < prevVoicing.length - 1; i++) { //Check each voice
+		for (var i = 0; i < prevVoicing.length; i++) { 
+			for (var j = i + 1;  j < prevVoicing.length; j++) {//Check each voice pair
 			
-			if (prevVoicing[i] > prevVoicing[i + 1] && currentVoicing[i] < currentVoicing[i + 1]) { //Detects Voice crossing
-				return true;
+				if (prevVoicing[i] > prevVoicing[j] && currentVoicing[i] < currentVoicing[j]) { //Detects Voice crossing Low to high (If voice 1 is currently higher than voice 2, but will be higher than voice 2 in the next chord, choose another voicing.
+					return true; 
+				}
+			
+				if (prevVoicing[i] < prevVoicing[j] && currentVoicing[i] > currentVoicing[j]) { //Detects Voice crossing High to low
+					return true;
+				}
+			
 			}
-			
-			if (prevVoicing[i] < prevVoicing[i + 1] && currentVoicing[i] > currentVoicing[i + 1]) { //Detects Voice crossing
-				return true;
-			}
-			
 		}
 		return false;
 	}
 
+	function hasBigBass(prevVoicing, currentVoicing) {
+		var prevBass = prevVoicing[0]; //Lowest note in previous chord
+		var currentBass = currentVoicing[0]; //Lowest note in the current chord
+		
+		var bassLeap = Math.abs(prevBass - currentBass);
+		
+		if (bassLeap > 8) { //Leaps will not exceed a minor 6th
+			return true; 
+		}
+		
+		return false;
+	}
+
+
+	function dropSol(prevVoicing, currentVoicing) {
+		var prevBass = prevVoicing[0]; //Lowest note in previous chord
+		var currentBass = currentVoicing[0]; //Lowest note in the current chord
+		
+		if (prevBass === 55 && currentBass === 55) { //If two sols are in a row
+				if(Math.random() < 0.5) {
+					currentVoicing[0] -= 12; //Drop bass from 55 to 43
+				}
+			}
+		
+		return currentVoicing;
+		
+	}
 
 	for (var index = 0; index < chordList.length; index++) {//Index is used for numerical placement, loops through each chord
 		var chord = chordList[index];
@@ -566,14 +598,15 @@ function assignMIDI(chordList) {
 			var currentChordOptions = chordVoicings[chord]; //Get the possible options
 			
 			if (currentChordOptions) { //Calculate the distance between the previous voicing and all potential voicings
-				var validVoicings = currentChordOptions.filter(function(currentVoicing) {
+				var validVoicings = currentChordOptions.filter(function(currentVoicing) { //Filters out bad voicings
 					return !hasParallel5thsor8ves(prevVoicing, currentVoicing) && //Removes voicings with parallels
 							!hasVCross(prevVoicing, currentVoicing); //Removes voicings that cross
+							!hasBigBass(prevVoicing, currentVoicing); //Removes voicings with large bass leaps
 				});
 				
-				var bestVoicing = validVoicings.length > 0 ? validVoicings : currentChordOptions; //"Just in case", if parallels cannot be avoided, use the closest voicing.		
+				var possibleVoicings = validVoicings.length > 0 ? validVoicings : currentChordOptions; //"Just in case", if parallels cannot be avoided, use the closest voicing.		
 				
-				var closestVoicing = currentChordOptions.reduce(function(closest, currentVoicing) { //.reduce is a callback function
+				var closestVoicing = possibleVoicings.reduce(function(closest, currentVoicing) { //.reduce is a callback function, finds the closest function
 					var distance = 0;
 					for (var i = 0; i < Math.min(prevVoicing.length, currentVoicing.length); i++) { //Calculates the distance between all potential options
 						distance += Math.abs(prevVoicing[i] - currentVoicing[i]); //Finds the absolute distance
@@ -585,6 +618,8 @@ function assignMIDI(chordList) {
 					return closest; //Returns the closest voicing
 				},  { voicing: [], distance: Infinity}).voicing; //Start with Infinity to ensure the first voicing.
 					
+					
+				closestVoicing = dropSol(prevVoicing, closestVoicing); 	
 				midiList.push(closestVoicing) //Return the closest voicing
 			} else {
             	midiList.push([0]); // Default fallback for unknown chords
