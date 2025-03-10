@@ -323,16 +323,24 @@ function chordPrevention (prevChord, newChord) { //Rules!
 	}
 		//Move This function later on, remove from generatechordlist
 	
-	if (newChord === "I6" && prevChord === "V6/5") {
-		return true; //I6 cannot go to V6/5
+	if (newChord === "I6" && (prevChord === "V6/5" ||prevChord === "V6")) {
+		return true; //I6 cannot go to V6/5 or V6
 	}	
 	
-	if ((newChord === "I" || newChord === "V7" || newChord === "V6/5" ) && prevChord === "V4/2") {
+	if (newChord === "I"  && prevChord === "V4/2") {
 		return true; //I cannot go to V4/2
 	}	
 	
-	if (newChord === "I6" && (prevChord === "V6/5" || prevChord === "viiø7")) {
-		return true; //I6 cannot go to V6/5 or viiø7
+	if (newChord === "V4/2"  && prevChord === "V6/5") {
+		return true; //V6/5 cannot go to V4/2
+	}
+	
+	if (newChord === "V4/2"  && prevChord === "V7") {
+		return true; //V7 cannot go to V4/2
+	}
+	
+	if (newChord === "I6" && prevChord === "viiø7") {
+		return true; //I6 cannot go to viiø7
 	}	
 	
 	if ((newChord === "viiø7" || newChord === "viiø4/2") && prevChord === "I6") {
