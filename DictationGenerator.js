@@ -286,7 +286,7 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true;
 	}
 	
-	 if (newChord === "I" && prevChord === "ii") {
+	if (newChord === "I" && prevChord === "ii") {
 		return true; // No I to ii!!
 	}
 	
@@ -298,7 +298,7 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true; // V7 to V is not allowed!
 	}
 		
-	 if (newChord === "ii" && prevChord === "ii7") {
+	if (newChord === "ii" && prevChord === "ii7") {
 		return true; //No triad after 7th
 	}
 	
@@ -317,13 +317,44 @@ function chordPrevention (prevChord, newChord) { //Rules!
 	if ((newChord === "IV" || newChord === "ii6" || newChord === "ii6/5") && (prevChord === "viiø7" || prevChord === "V6/5")) {
 		return true; //Prevent tritones in bass	
 		
+	}	
 	if (newChord === "vii°6" && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" || prevChord === "V4/2")) {
 		return true; //No triad after 7th
 	}
 		//Move This function later on, remove from generatechordlist
-		
-
+	
+	if (newChord === "I6" && prevChord === "V6/5") {
+		return true; //I6 cannot go to V6/5
+	}	
+	
+	if ((newChord === "I" || newChord === "V7" || newChord === "V6/5" ) && prevChord === "V4/2") {
+		return true; //I cannot go to V4/2
+	}	
+	
+	if (newChord === "I6" && (prevChord === "V6/5" || prevChord === "viiø7")) {
+		return true; //I6 cannot go to V6/5 or viiø7
+	}	
+	
+	if ((newChord === "viiø7" || newChord === "viiø4/2") && prevChord === "I6") {
+		return true; //viiø7 and viiø4/2 cannot go to I6
 	}
+	
+	if (newChord === "I6" && (prevChord === "viiø7" || prevChord === "viiø4/2")) {
+		return true; //I6 cannot go to viiø7 and viiø4/2 
+	}
+	
+	if (newChord === "I" && (prevChord === "viiø4/3" || prevChord === "viiø6/5" || prevChord === "viiø4/2")) {
+		return true; //seven half-dim inversions cannot go to I
+	}
+	
+	if ((newChord === "viiø4/3" || newChord === "viiø6/5" || newChord === "viiø4/2") && prevChord === "I") {
+		return true; // I cannot go to sseven half-dim inversions
+	}
+	
+	if (newChord === "Cad6/4" && prevChord ===  "viiø4/2") {
+		return true;
+	}
+	
 	return false;
 }
 
