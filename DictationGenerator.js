@@ -22,11 +22,19 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 	
 	"I6": [
+		[40, 48, 52, 55],
+		[40, 52, 55, 60],
+		[40, 55, 60, 64],
+		[40, 60, 64, 67],
+		[40, 64, 67, 72],
+		[40, 67, 72, 76],
+		[40, 72, 76, 84],
 		[52, 55, 60, 64],
 		[52, 60, 64, 67],
 		[52, 64, 67, 72],
 		[52, 67, 72, 76],
-		[52, 72, 76, 84]
+		[52, 72, 76, 84],
+		[64, 72, 76, 84]
 	],
 	
 	"Cad6/4" : [
@@ -43,6 +51,13 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 		
 	"iii": [
+		[40, 47, 52, 55],
+		[40, 52, 55, 59],
+		[40, 55, 59, 64],
+		[40, 59, 64, 67],
+		[40, 64, 67, 71],
+		[40, 67, 71, 76],
+		[40, 71, 76, 84],
 		[52, 59, 64, 67],
 		[52, 64, 67, 71],
 		[52, 67, 71, 76],
@@ -115,6 +130,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[41, 65, 69, 74],
 		[41, 69, 74, 77],
 		[41, 74, 77, 81],
+		[53, 57, 62, 65],
 		[53, 62, 65, 69],
 		[53, 65, 69, 74],
 		[53, 69, 74, 77],
@@ -356,7 +372,7 @@ function chordPrevention (prevChord, newChord) { //Rules!
 	}
 	
 	if ((newChord === "viiø4/3" || newChord === "viiø6/5" || newChord === "viiø4/2") && prevChord === "I") {
-		return true; // I cannot go to sseven half-dim inversions
+		return true; // I cannot go to seven half-dim inversions
 	}
 	
 	if (newChord === "Cad6/4" && prevChord ===  "viiø4/2") {
