@@ -1,11 +1,213 @@
 
+inlets = 2;
 outlets = 2;
 
 	//	0: ["I", "I6", "iii", "vi"],
 	//	1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
 	//	2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
+	
+var currentMode = "Major";
 
-var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, high harm (MIDI 41-84) (Bass MIDI 41-60), "Tenor" note can be close depending on the bass note
+function msg_int(val) {
+	if (inlet === 1) {
+		currentMode = val === 0 ? "major" : "minor";
+	}
+}
+	
+	
+var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, high harm (MIDI 41-84) (Bass MIDI 40-60), "Tenor" note can be close depending on the bass note
+	
+	//minor chords
+	
+	"i": [
+		[48, 55, 60, 63],
+		[48, 60, 63, 67],
+		[48, 63, 67, 72],
+		[48, 67, 72, 75],
+		[60, 60, 63, 67],
+		[60, 63, 67, 72],
+		[60, 67, 72, 75],
+		[60, 72, 75, 79],
+		[60, 75, 79, 84],
+		[48, 72, 75, 79],
+		[48, 75, 79, 84]
+	],
+	
+	"i6": [
+		[39, 48, 51, 55],
+		[39, 51, 55, 60],
+		[39, 55, 60, 63],
+		[39, 60, 63, 67],
+		[39, 63, 67, 72],
+		[39, 67, 72, 75],
+		[39, 72, 75, 84],
+		[51, 55, 60, 63],
+		[51, 60, 63, 67],
+		[51, 63, 67, 72],
+		[51, 67, 72, 75],
+		[51, 72, 75, 84],
+		[63, 72, 75, 84]
+	],
+	
+	"Cad6/4 (m)" : [
+		[55, 60, 63, 67],
+		[55, 63, 67, 72],
+		[55, 67, 72, 75],
+		[55, 60, 63, 67],
+		[55, 63, 67, 72],
+		[55, 66, 72, 75],
+		[55, 72, 75, 79],
+		[55, 75, 79, 84],
+		[55, 72, 75, 79],
+		[55, 75, 79, 84],
+	],
+		
+	"♭III": [
+		[39, 46, 51, 55],
+		[39, 51, 55, 58],
+		[39, 55, 58, 63],
+		[39, 58, 63, 67],
+		[39, 63, 67, 70],
+		[39, 67, 70, 75],
+		[39, 70, 76, 82],
+		[51, 58, 63, 67],
+		[51, 63, 67, 70],
+		[51, 67, 70, 75],
+		[51, 70, 75, 79],
+		[51, 75, 79, 82],
+		[63, 63, 67, 70],
+		[63, 67, 70, 75],
+		[63, 70, 75, 79],
+		[63, 75, 79, 82]
+	],
+		
+	"♭VI": [
+		[44, 51, 56, 60],
+		[44, 56, 60, 63],
+		[44, 60, 63, 68],
+		[44, 63, 68, 72],
+		[56, 56, 60, 63],
+		[56, 60, 63, 68],
+		[56, 63, 68, 72],
+		[56, 68, 72, 75],
+		[56, 72, 75, 80],
+		[56, 75, 80, 84],
+		[44, 68, 72, 75],
+		[44, 72, 75, 80],
+		[44, 75, 80, 84]
+	],
+	
+	"iv": [
+		[53, 60, 65, 68],
+		[53, 65, 68, 72],
+		[53, 68, 72, 77],
+		[53, 72, 77, 80],
+		[53, 77, 80, 84],
+		[41, 65, 68, 72],
+		[41, 68, 72, 77],
+		[41, 72, 77, 80],
+		[41, 77, 80, 84]
+	],	
+	
+	"iv6": [
+		[44, 53, 56, 60],
+		[44, 56, 60, 65],
+		[44, 60, 65, 68],
+		[44, 65, 68, 72],
+		[44, 68, 72, 77],
+		[44, 72, 77, 80],
+		[44, 77, 80, 84],
+		[56, 56, 60, 65],
+		[56, 60, 65, 68],
+		[56, 65, 68, 72],
+		[56, 68, 72, 77],
+		[56, 72, 77, 80],
+		[56, 77, 80, 84]
+	],
+
+	"ii°6": [
+		[41, 50, 53, 56],
+		[41, 53, 56, 62],
+		[41, 56, 62, 65],
+		[41, 62, 65, 68],
+		[41, 65, 68, 74],
+		[41, 68, 74, 77],
+		[41, 74, 77, 80],
+		[53, 56, 62, 65],
+		[53, 62, 65, 68],
+		[53, 65, 68, 74],
+		[53, 68, 74, 77],
+		[53, 74, 77, 80]
+	],	
+	
+	"iiø6/5": [
+		[53, 68, 72, 74],
+		[53, 72, 74, 80],
+		[53, 74, 80, 84],
+		[41, 68, 72, 74],
+		[41, 72, 74, 80],
+		[41, 74, 80, 84],
+		[53, 56, 60, 62],
+		[53, 60, 62, 68],
+		[53, 62, 68, 72],
+		[41, 50, 56, 60],
+		[41, 56, 60, 62],
+		[41, 60, 62, 68],
+		[41, 62, 68, 72]
+	],	
+	
+	"vii°7": [
+		[47, 53, 56, 62],
+		[47, 56, 62, 65],
+		[47, 62, 65, 68],
+		[47, 65, 68, 74],
+		[47, 68, 74, 77],
+		[59, 62, 65, 68],
+		[59, 65, 68, 74],
+		[59, 68, 74, 77],
+		[59, 74, 77, 80]
+	],	
+	
+	"vii°6/5": [
+		[50, 56, 58, 65],
+		[50, 58, 65, 68],
+		[50, 65, 68, 71],
+		[50, 68, 71, 77],
+		[50, 71, 77, 80],
+		[50, 77, 80, 83]
+	],	
+	
+	"vii°4/3": [
+		[53, 59, 62, 68],
+		[53, 62, 68, 71],
+		[53, 68, 71, 74],
+		[53, 71, 74, 80],
+		[53, 74, 80, 83],
+		[41, 50, 56, 59],
+		[41, 56, 59, 65],
+		[41, 59, 62, 68],
+		[41, 74, 80, 83],
+		[41, 62, 68, 71],
+		[41, 68, 71, 74],
+		[41, 71, 74, 80]
+	],	
+	
+	"vii°4/2": [
+		[56, 62, 65, 71],
+		[56, 65, 71, 74],
+		[56, 71, 74, 77],
+		[56, 74, 77, 83],
+		[44, 62, 65, 71],
+		[44, 65, 71, 74],
+		[44, 71, 74, 77],
+		[44, 74, 77, 83],
+		[44, 50, 52, 59],
+		[44, 53, 59, 62],
+		[44, 59, 62, 65],
+		[44, 62, 65, 71]
+	],	
+	
+	//Major chords
 	
 	"I": [
 		[48, 55, 60, 64],
@@ -104,13 +306,13 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[45, 65, 69, 72],
 		[45, 69, 72, 77],
 		[45, 72, 77, 81],
-		[45, 72, 77, 84],
+		[45, 77, 81, 84],
 		[57, 57, 60, 65],
 		[57, 60, 65, 69],
 		[57, 65, 69, 72],
 		[57, 69, 72, 77],
 		[57, 72, 77, 81],
-		[57, 72, 77, 84]
+		[57, 77, 81, 84]
 	],
 
 	"ii": [
@@ -272,7 +474,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[53, 71, 74, 81],
 		[53, 74, 81, 83],
 		[41, 50, 57, 59],
-		[41, 57, 59, 64],
+		[41, 57, 59, 65],
 		[41, 59, 62, 69],
 		[41, 74, 81, 83],
 		[41, 62, 69, 71],
@@ -293,7 +495,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[45, 53, 59, 62],
 		[45, 59, 62, 65],
 		[45, 62, 65, 71]
-	],	
+	],
 };	
 
 function chordPrevention (prevChord, newChord) { //Rules!
@@ -322,6 +524,10 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true; //No triad after 7th
 	}
 	
+	if (newChord === "ii°6" && prevChord === "ii°6/5") {
+		return true; //No triad after 7th
+	}
+	
 	if (newChord === "ii" && prevChord === "ii6/5") {
 		return true; //No triad after 7th
 	}
@@ -330,10 +536,19 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true; //No triad after 7th
 	}
 	
+	if (newChord === "vii°6" && (prevChord === "vii°7" ||prevChord === "vii°6/5" || prevChord === "vii°4/3" || prevChord === "vii°4/2")) {
+		return true; //No triad after 7th
+	}
+	
 	if ((newChord === "IV" || newChord === "ii6" || newChord === "ii6/5") && (prevChord === "viiø7" || prevChord === "V6/5")) {
 		return true; //Prevent tritones in bass	
 		
 	}	
+	if ((newChord === "iv" || newChord === "ii°6" || newChord === "iiø6/5") && (prevChord === "vii°7" || prevChord === "V6/5")) {
+		return true; //Prevent tritones in bass	
+		
+	}
+	
 	if (newChord === "vii°6" && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" || prevChord === "V4/2")) {
 		return true; //No triad after 7th
 	}
@@ -347,19 +562,47 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true; //I cannot go to V4/2
 	}	
 	
+	if (newChord === "i6" && (prevChord === "V6/5" ||prevChord === "V6")) {
+		return true; //I6 cannot go to V6/5 or V6
+	}	
+	
+	if (newChord === "i"  && prevChord === "V4/2") {
+		return true; //I cannot go to V4/2
+	}
+	
+	if (newChord === "Cad6/4"  && prevChord === "V4/2") {
+		return true; //Cad6/4 cannot go to V4/2
+	}
+	
+	if (newChord === "Cad6/4(m)"  && prevChord === "V4/2") {
+		return true; //Cad6/4 cannot go to V4/2
+	}
+	
+	if (newChord === "V6/5"  && prevChord === "V4/2") {
+		return true; //V4/2 cannot go to V6/5
+	}
+	
 	if (newChord === "V4/2"  && prevChord === "V6/5") {
 		return true; //V6/5 cannot go to V4/2
 	}
 	
-	if (newChord === "V4/2"  && prevChord === "V7") {
-		return true; //V7 cannot go to V4/2
+	if (newChord === "V7"  && prevChord === "V4/2") {
+		return true; //V4/2 cannot go to V7
 	}
 	
 	if (newChord === "I6" && prevChord === "viiø7") {
 		return true; //I6 cannot go to viiø7
+	}
+	
+	if (newChord === "i6" && prevChord === "vii°7") {
+		return true; //I6 cannot go to viiø7
 	}	
 	
 	if ((newChord === "viiø7" || newChord === "viiø4/2") && prevChord === "I6") {
+		return true; //viiø7 and viiø4/2 cannot go to I6
+	}
+	
+	if ((newChord === "vii°7" || newChord === "vii°4/2") && prevChord === "i6") {
 		return true; //viiø7 and viiø4/2 cannot go to I6
 	}
 	
@@ -378,6 +621,23 @@ function chordPrevention (prevChord, newChord) { //Rules!
 	if (newChord === "Cad6/4" && prevChord ===  "viiø4/2") {
 		return true;
 	}
+	
+	if (newChord === "i6" && (prevChord === "vii°7" || prevChord === "vii°4/2")) {
+		return true; //I6 cannot go to viiø7 and viiø4/2 
+	}
+	
+	if (newChord === "i" && (prevChord === "vii°4/3" || prevChord === "vii°6/5" || prevChord === "vii°4/2")) {
+		return true; //seven half-dim inversions cannot go to I
+	}
+	
+	if ((newChord === "vii°4/3" || newChord === "vii°6/5" || newChord === "vii°4/2") && prevChord === "i") {
+		return true; // I cannot go to seven half-dim inversions
+	}
+	
+	if (newChord === "Cad6/4(m)" && prevChord ===  "vii°4/2") {
+		return true;
+	}
+	
 	
 	return false;
 }
@@ -460,25 +720,36 @@ function generateChordList() {
 	}
 		
 	var chordOptions = {
-		0: ["I", "I6", "iii", "vi"],
-		1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
-		2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
+		"major": {
+			0: ["I", "I6", "iii", "vi"],
+			1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
+			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
+		},
+		"minor": {
+			0: ["i", "i6", "♭III", "♭VI"],
+			1: ["iv", "iv6", "ii°6", "iiø6/5"],
+			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "vii°7", "vii°6/5", "vii°4/3", "vii°4/2"]
+		}
 	}; //1 open
 	
 	var romanNumeralList = [];
 	
 	for (var i = 0; i < chordList.length; i++) {
 		var num = chordList[i];
-		var options = chordOptions[num];
+		var options = chordOptions[currentMode][num];
 		var chosenRoman;
 		
 		if (i === 0) {
-			chosenRoman = "I"; // First chord is always root position tonic
+			chosenRoman = currentMode === "major" ? "I" : "i"; // First chord is always root position tonic
 			
 		} else if (i === chordList.length -1) { //Chooses the final chord
 			
 			if (num === 0 ) {
-			 	chosenRoman = Math.random() < 0.5 ? "I" : "I6"; // 50/50 of chord
+				do {
+			 		chosenRoman = Math.random() < 0.5 
+						? (currentMode === "major" ? "I" : "i") //If mode is major, choose I, if minor choose i
+ 						: (currentMode === "major" ? "I6" : "i6");
+					} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			
 			} else if (num === 2) {
 				chosenRoman = "V"; 	//Final chord logic
@@ -507,7 +778,7 @@ function generateChordList() {
 			}
 			} else if (i === chordList.length - 2 && finalCadence [0] === 1) {
 				do {
-					chosenRoman = "IV"; //Ensures Plagal if penultimate is 1
+					chosenRoman = currentMode === "major" ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 				
 			} else if (i === chordList.length - 2 && finalCadence[0] === 2) {
@@ -526,7 +797,7 @@ function generateChordList() {
 	// Assigns 0, 1 and 2 to chords through map(), teturn line is choosing the specific chord.
 	}
 	
-	if (romanNumeralList[5] == "Cad6/4") {
+	if (romanNumeralList[5] == "Cad6/4" || romanNumeralList[5] === "Cad6/4(m)") {
 		var seventhChord;
 		do {
 			seventhChord = ["V", "V7", "V4/2"][Math.floor(Math.random() * 3)];
@@ -535,10 +806,12 @@ function generateChordList() {
 		var eighthChord;
 		if (seventhChord === "V" || seventhChord === "V7") {
 			do {
-			eighthChord = Math.random() < 0.5 ? "I" : "I6";
+			eighthChord = Math.random() < 0.5 
+				? (currentMode === "major" ? "I" : "i")
+ 				: (currentMode === "major" ? "I6" : "i6");
 			} while (chordPrevention(romanNumeralList[6], eighthChord));
 		} else if (seventhChord === "V4/2") {
-			eighthChord = "I6";
+			eighthChord = currentMode === "major" ? "I6" : "i6";
 		}
 		
 		romanNumeralList[6] = seventhChord;
@@ -591,13 +864,13 @@ function assignMIDI(chordList) {
 	
 	function hasVCross(prevVoicing, currentVoicing) {
 		for (var i = 0; i < prevVoicing.length; i++) { 
-			for (var j = i + 1;  j < prevVoicing.length; j++) {//Check each voice pair
+			for (var j = i + 1;  j < prevVoicing.length; j++) {//Check each voice pair (i and j)
 			
-				if (prevVoicing[i] > prevVoicing[j] && currentVoicing[i] < currentVoicing[j]) { //Detects Voice crossing Low to high (If voice 1 is currently higher than voice 2, but will be higher than voice 2 in the next chord, choose another voicing.
+				if (prevVoicing[i] > prevVoicing[j] && currentVoicing[i] < currentVoicing[j]) { // Voice i was higher than j, but is now lower
 					return true; 
 				}
 			
-				if (prevVoicing[i] < prevVoicing[j] && currentVoicing[i] > currentVoicing[j]) { //Detects Voice crossing High to low
+				if (prevVoicing[i] < prevVoicing[j] && currentVoicing[i] > currentVoicing[j]) { // Voice i was lower than j, but is now higher
 					return true;
 				}
 			
@@ -628,7 +901,7 @@ function assignMIDI(chordList) {
 				if(Math.random() < 0.5) {
 					currentVoicing[0] -= 12; //Drop bass from 55 to 43
 				}
-			}
+			} 
 		
 		return currentVoicing;
 		
@@ -637,12 +910,19 @@ function assignMIDI(chordList) {
 	for (var index = 0; index < chordList.length; index++) {//Index is used for numerical placement, loops through each chord
 		var chord = chordList[index];
 		
-		if (index === 0 && chord === "I") {
-			var firstChordOptions = [
-				[48, 60, 64, 67],
-				[48, 64, 67, 72],
-				[48, 67, 72, 76]					//First chord is one of these options!
-			];
+		if (index === 0 && (chord === "I" || chord === "i")) { //First chord is one of these voicing options!
+			var firstChordOptions = currentMode === "major" 
+				? [
+					[48, 60, 64, 67],
+					[48, 64, 67, 72],
+					[48, 67, 72, 76]
+				]
+				: [
+					[48, 60, 63, 67],
+					[48, 63, 67, 72],
+					[48, 67, 72, 75]
+				];
+			
 			var selectedVoicing = firstChordOptions[Math.floor(Math.random() * firstChordOptions.length)]; //Randomly choose one of the three voicings.
 			midiList.push(selectedVoicing);
 		}
@@ -651,11 +931,12 @@ function assignMIDI(chordList) {
 			//var prevChord = chordList[index - 1]; //Get previous RN
 			var prevVoicing = midiList[index - 1]; //Get previous voicing
 			var currentChordOptions = chordVoicings[chord]; //Get the possible options
+
 			
 			if (currentChordOptions) { //Calculate the distance between the previous voicing and all potential voicings
 				var validVoicings = currentChordOptions.filter(function(currentVoicing) { //Filters out bad voicings
 					return !hasParallel5thsor8ves(prevVoicing, currentVoicing) && //Removes voicings with parallels
-							!hasVCross(prevVoicing, currentVoicing); //Removes voicings that cross
+							!hasVCross(prevVoicing, currentVoicing) && //Removes voicings that cross
 							!hasBigBass(prevVoicing, currentVoicing); //Removes voicings with large bass leaps
 				});
 				
