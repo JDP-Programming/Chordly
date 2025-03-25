@@ -10,7 +10,15 @@ var currentMode = "Major";
 
 function msg_int(val) {
 	if (inlet === 1) {
-		currentMode = val === 0 ? "major" : "minor";
+		if (val === 0) {
+			currentMode = "major";
+		} else if (val === 1) {
+			currentMode = "minor";
+		} else if (val === 2) {
+			currentMode = "major+";
+		} else if (val === 3) {
+			currentMode = "minor+";
+		}
 	}
 }
 	
@@ -45,11 +53,24 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[51, 60, 63, 67],
 		[51, 63, 67, 72],
 		[51, 67, 72, 75],
-		[51, 72, 75, 84],
-		[63, 72, 75, 84]
+		[51, 72, 75, 84]
 	],
 	
-	"Cad6/4 (m)" : [
+	"Cad6/4(m)" : [
+		[43, 48, 51, 55],
+		[43, 51, 55, 60],
+		[43, 55, 60, 53],
+		[43, 60, 63, 67],
+		[43, 63, 67, 72],
+		[43, 67, 72, 75],
+		[43, 60, 63, 67],
+		[43, 63, 67, 72],
+		[43, 66, 72, 75],
+		[43, 72, 75, 79],
+		[43, 75, 79, 84],
+		[43, 72, 75, 79],
+		[43, 75, 79, 84],
+		
 		[55, 60, 63, 67],
 		[55, 63, 67, 72],
 		[55, 67, 72, 75],
@@ -59,7 +80,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[55, 72, 75, 79],
 		[55, 75, 79, 84],
 		[55, 72, 75, 79],
-		[55, 75, 79, 84],
+		[55, 75, 79, 84]
 	],
 		
 	"♭III": [
@@ -74,11 +95,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[51, 63, 67, 70],
 		[51, 67, 70, 75],
 		[51, 70, 75, 79],
-		[51, 75, 79, 82],
-		[63, 63, 67, 70],
-		[63, 67, 70, 75],
-		[63, 70, 75, 79],
-		[63, 75, 79, 82]
+		[51, 75, 79, 82]
 	],
 		
 	"♭VI": [
@@ -103,6 +120,10 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[53, 68, 72, 77],
 		[53, 72, 77, 80],
 		[53, 77, 80, 84],
+		[41, 48, 53, 56],
+		[41, 53, 56, 60],
+		[41, 56, 60, 65],
+		[41, 60, 65, 68],
 		[41, 65, 68, 72],
 		[41, 68, 72, 77],
 		[41, 72, 77, 80],
@@ -155,6 +176,20 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[41, 60, 62, 68],
 		[41, 62, 68, 72]
 	],	
+	
+	"♭VII": [
+		[46, 53, 58, 62],
+    	[46, 58, 62, 65],
+    	[46, 62, 65, 70],
+    	[46, 65, 70, 74],
+    	[58, 58, 62, 65],
+    	[58, 62, 65, 70],
+    	[58, 65, 70, 74],
+    	[58, 70, 74, 77],
+    	[58, 74, 77, 82],
+    	[46, 70, 74, 77],
+    	[46, 74, 77, 82]
+	],
 	
 	"vii°7": [
 		[47, 53, 56, 62],
@@ -235,11 +270,23 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[52, 60, 64, 67],
 		[52, 64, 67, 72],
 		[52, 67, 72, 76],
-		[52, 72, 76, 84],
-		[64, 72, 76, 84]
+		[52, 72, 76, 84]
 	],
 	
 	"Cad6/4" : [
+		[43, 48, 52, 55],
+		[43, 52, 55, 60],
+		[43, 55, 60, 64],
+		[43, 60, 64, 67],
+		[43, 64, 67, 72],
+		[43, 67, 72, 76],
+		[43, 60, 64, 67],
+		[43, 64, 67, 72],
+		[43, 66, 72, 76],
+		[43, 72, 76, 79],
+		[43, 76, 79, 84],
+		[43, 72, 76, 79],
+		[43, 76, 79, 84],
 		[55, 60, 64, 67],
 		[55, 64, 67, 72],
 		[55, 67, 72, 76],
@@ -249,7 +296,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[55, 72, 76, 79],
 		[55, 76, 79, 84],
 		[55, 72, 76, 79],
-		[55, 76, 79, 84],
+		[55, 76, 79, 84]
 	],
 		
 	"iii": [
@@ -264,11 +311,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[52, 64, 67, 71],
 		[52, 67, 71, 76],
 		[52, 71, 76, 79],
-		[52, 76, 79, 83],
-		[64, 64, 67, 71],
-		[64, 67, 71, 76],
-		[64, 71, 76, 79],
-		[64, 76, 79, 83]
+		[52, 76, 79, 83]
 	],
 		
 	"vi": [
@@ -293,6 +336,10 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[53, 69, 72, 77],
 		[53, 72, 77, 81],
 		[53, 77, 81, 84],
+		[41, 48, 53, 57],
+		[41, 53, 57, 60],
+		[41, 57, 60, 65],
+		[41, 60, 65, 69],
 		[41, 65, 69, 72],
 		[41, 69, 72, 77],
 		[41, 72, 77, 81],
@@ -361,13 +408,15 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[55, 67, 71, 74],
 		[55, 71, 74, 79],
 		[55, 74, 79, 83],
+		[55, 79, 83, 86],
 		[43, 50, 55, 59],
 		[43, 55, 59, 62],
 		[43, 59, 62, 67],
 		[43, 62, 67, 71],
 		[43, 67, 71, 74],
 		[43, 71, 74, 79],
-		[43, 74, 79, 83]
+		[43, 74, 79, 83],
+		[43, 79, 83, 86]
 	],	
 	
 	"V7": [
@@ -382,7 +431,8 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[43, 62, 65, 71],
 		[43, 65, 71, 74],
 		[43, 71, 74, 77],
-		[43, 74, 77, 83]
+		[43, 74, 77, 83],
+		[43, 77, 83, 86]
 	],	
 	
 	"V6": [
@@ -395,7 +445,8 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[59, 62, 67, 71],
 		[59, 67, 71, 74],
 		[59, 71, 74, 79],
-		[59, 74, 79, 83]
+		[59, 74, 79, 83],
+		[59, 79, 83, 86]
 		
 	],	
 	
@@ -414,11 +465,12 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[47, 65, 67, 74],
 		[47, 67, 74, 77],
 		[47, 74, 77, 79],
+		[47, 77, 79, 86],
 		[59, 62, 65, 67],
 		[59, 65, 67, 74],
 		[59, 67, 74, 77],
 		[59, 74, 77, 79],
-		
+		[59, 77, 79, 86]
 		
 	],	
 	
@@ -428,7 +480,10 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[50, 65, 67, 71],
 		[50, 67, 71, 77],
 		[50, 71, 77, 79],
-		[50, 77, 79, 83]
+		[50, 77, 79, 83],
+		[62, 67, 71, 77],
+		[62, 71, 77, 79],
+		[62, 77, 79, 83]
 	],	
 	
 	"V4/2": [
@@ -437,13 +492,15 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[53, 67, 71, 74],
 		[53, 71, 74, 79],
 		[53, 74, 79, 83],
+		[53, 79, 83, 86],
 		[41, 50, 55, 59],
 		[41, 55, 59, 62],
 		[41, 59, 62, 67],
 		[41, 62, 67, 71],
 		[41, 67, 71, 74],
 		[41, 71, 74, 79],
-		[41, 74, 79, 83]
+		[41, 74, 79, 83],
+		[41, 79, 83, 86]
 	],	
 	
 	"viiø7": [
@@ -496,23 +553,662 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[45, 59, 62, 65],
 		[45, 62, 65, 71]
 	],
+	
+	//Challenge Chords
+	
+	"IV7": [
+		[53, 60, 64, 69],
+		[53, 64, 69, 72],
+		[53, 69, 72, 76],
+		[53, 72, 76, 81],
+		[53, 76, 81, 84],
+		[41, 64, 69, 72],
+		[41, 69, 72, 76],
+		[41, 72, 76, 81],
+		[41, 76, 81, 84]
+	],	
+	
+	"IV6/5": [
+		[45, 52, 53, 60],
+		[45, 53, 60, 64],
+		[45, 60, 64, 65],
+		[45, 64, 65, 72],
+		[45, 65, 72, 76],
+		[45, 72, 76, 77],
+		[45, 76, 77, 84],
+		[57, 60, 64, 65],
+		[57, 64, 65, 72],
+		[57, 65, 72, 76],
+		[57, 72, 76, 77],
+		[57, 76, 77, 84]
+	],
+	
+	"iv7": [
+		[53, 60, 63, 68],
+		[53, 63, 68, 72],
+		[53, 68, 72, 75],
+		[53, 72, 75, 80],
+		[53, 75, 80, 84],
+		[41, 63, 68, 72],
+		[41, 68, 72, 75],
+		[41, 72, 75, 80],
+		[41, 75, 80, 84]
+	],	
+	
+	"iv6/5": [
+		[44, 51, 53, 60],
+		[44, 53, 60, 63],
+		[44, 60, 63, 65],
+		[44, 63, 65, 72],
+		[44, 65, 72, 75],
+		[44, 72, 75, 77],
+		[44, 75, 77, 84],
+		[56, 60, 63, 65],
+		[56, 63, 65, 72],
+		[56, 65, 72, 75],
+		[56, 72, 75, 77],
+		[56, 75, 77, 84]
+	],
+	
+	"♭II6" : [ //Might need rule to prevent Augmented 2nds (le to ti)
+		[49, 53, 56, 61],
+		[49, 56, 61, 65],
+		[49, 61, 65, 68],
+		[49, 65, 68, 73],
+		[49, 68, 73, 77],
+		[49, 73, 77, 80],
+		[49, 77, 80, 85]
+	],
+	
+	"It+6" : [
+		[44, 54, 60, 60],
+		[44, 60, 60, 66],
+		[44, 60, 66, 72],
+		[44, 66, 72, 72],
+		[44, 72, 72, 78],
+		[44, 72, 78, 84],
+		[56, 60, 60, 66],
+		[56, 60, 66, 72],
+		[56, 66, 72, 72],
+		[56, 72, 72, 78],
+		[56, 72, 78, 84]
+	],
+	
+		
+	"Fr+6" : [
+		[44, 54, 60, 62],
+		[44, 60, 62, 66],
+		[44, 62, 66, 72],
+		[44, 66, 72, 74],
+		[44, 72, 74, 78],
+		[44, 74, 78, 84],
+		[56, 60, 62, 66],
+		[56, 62, 66, 72],
+		[56, 66, 72, 74],
+		[56, 74, 72, 78],
+		[56, 74, 78, 84]
+	],
+	
+	"Ger+6" : [
+		[44, 54, 60, 63],
+		[44, 60, 63, 66],
+		[44, 63, 66, 72],
+		[44, 66, 72, 75],
+		[44, 72, 75, 78],
+		[44, 75, 78, 84],
+		[56, 60, 63, 66],
+		[56, 63, 66, 72],
+		[56, 66, 72, 75],
+		[56, 75, 72, 78],
+		[56, 75, 78, 84]
+	],
+	
+	"III#": [
+		[52, 59, 64, 68],
+		[52, 64, 68, 71],
+		[52, 68, 71, 76],
+		[52, 71, 76, 80],
+		[52, 76, 80, 83],
+		[40, 47, 52, 56],
+		[40, 52, 56, 59],
+		[40, 56, 59, 64],
+		[40, 59, 64, 68],
+		[40, 64, 68, 71],
+		[40, 68, 71, 76],
+		[40, 71, 76, 80],
+		[40, 76, 80, 83]
+	],
+	
+	"VI#" : [
+		[57, 64, 69, 73],
+		[57, 69, 73, 76],
+		[57, 73, 76, 81],
+		[57, 76, 81, 85],
+		[45, 52, 57, 61],
+		[45, 57, 61, 64],
+		[45, 61, 64, 69],
+		[45, 64, 69, 73],
+		[45, 69, 73, 76],
+		[45, 73, 76, 81],
+		[45, 76, 81, 85]
+	],
+	
+	"V+": [
+		[55, 59, 63, 67],
+		[55, 63, 67, 71],
+		[55, 67, 71, 75],
+		[55, 71, 75, 79],
+		[55, 75, 79, 83],
+		[43, 51, 55, 59],
+		[43, 55, 59, 63],
+		[43, 59, 63, 67],
+		[43, 63, 67, 71],
+		[43, 67, 71, 75],
+		[43, 71, 75, 79],
+		[43, 75, 79, 83]
+	],	
+	
+	"I+": [
+		[48, 56, 60, 64],
+		[48, 60, 64, 68],
+		[48, 64, 68, 72],
+		[48, 68, 72, 76],
+		[60, 60, 64, 68],
+		[60, 64, 68, 72],
+		[60, 68, 72, 76],
+		[60, 72, 76, 80],
+		[60, 76, 80, 84],
+		[48, 72, 76, 80],
+		[48, 76, 80, 84]
+	],
+	
+	//Applied Chords
+
+	"V/V": [
+		[50, 55, 57, 62],
+		[50, 57, 62, 66],
+		[50, 62, 66, 69],
+		[50, 66, 69, 74],
+		[50, 69, 74, 78],
+		[50, 74, 78, 81]
+	],
+	
+	"V7/V": [
+		[50, 55, 57, 60],
+		[50, 57, 60, 66],
+		[50, 60, 66, 69],
+		[50, 66, 69, 72],
+		[50, 69, 72, 78],
+		[50, 72, 78, 81],
+		[50, 78, 81, 84]
+	],
+
+	"V6/V": [
+		[42, 50, 57, 62],
+		[42, 57, 62, 62],
+		[42, 62, 62, 69],
+		[42, 62, 69, 74],
+		[42, 69, 74, 74],
+		[42, 74, 74, 81],
+		[54, 62, 62, 69],
+		[54, 62, 69, 74],
+		[54, 69, 74, 74],
+		[54, 74, 74, 81]
+	],
+	
+	"V6/5/V": [
+		[42, 50, 57, 60],
+		[42, 57, 60, 62],
+		[42, 60, 62, 69],
+		[42, 62, 69, 72],
+		[42, 69, 72, 74],
+		[42, 72, 74, 81],
+		[42, 74, 81, 84],
+		[54, 60, 62, 69],
+		[54, 62, 69, 72],
+		[54, 69, 72, 74],
+		[54, 72, 74, 81],
+		[54, 74, 81, 84]
+	],
+	
+	"V4/3/V" : [
+		[45, 50, 54, 60],
+		[45, 54, 60, 62],
+		[45, 60, 62, 66],
+		[45, 62, 66, 72],
+		[45, 66, 72, 74],
+		[45, 72, 74, 78],
+		[45, 74, 78, 84],
+		[57, 60, 62, 66],
+		[57, 62, 66, 72],
+		[57, 66, 72, 74],
+		[57, 72, 74, 78],
+		[57, 74, 78, 84]
+	],
+	
+	"V4/2/V" : [
+		[48, 54, 57, 62],
+		[48, 57, 62, 66],
+		[48, 62, 66, 69],
+		[48, 66, 69, 74],
+		[48, 69, 74, 78],
+		[48, 74, 78, 81],
+		[60, 62, 66, 69],
+		[60, 66, 69, 74],
+		[60, 69, 74, 78],
+		[60, 74, 78, 81]
+	],
+	
+	"V/iv" : [
+		[48, 55, 60, 64],
+		[48, 60, 64, 67],
+		[48, 64, 67, 72],
+		[48, 67, 72, 76],
+		[60, 60, 64, 67],
+		[60, 64, 67, 72],
+		[60, 67, 72, 76],
+		[60, 72, 76, 79],
+		[60, 76, 79, 84],
+		[48, 72, 76, 79],
+		[48, 76, 79, 84]
+	],
+	
+	"V7/iv" : [
+		[48, 55, 58, 64],
+		[48, 58, 64, 67],
+		[48, 64, 67, 70],
+		[48, 67, 70, 76],
+		[60, 57, 64, 67],
+		[60, 64, 67, 70],
+		[60, 67, 70, 76],
+		[60, 70, 76, 79],
+		[60, 76, 79, 82],
+		[48, 70, 76, 79],
+		[48, 76, 79, 82]
+	],
+	
+	"V7/IV" : [
+		[48, 55, 58, 64],
+		[48, 58, 64, 67],
+		[48, 64, 67, 70],
+		[48, 67, 70, 76],
+		[60, 57, 64, 67],
+		[60, 64, 67, 70],
+		[60, 67, 70, 76],
+		[60, 70, 76, 79],
+		[60, 76, 79, 82],
+		[48, 70, 76, 79],
+		[48, 76, 79, 82]
+	],
+	
+		
+	"V6/iv" : [
+		[40, 48, 55, 60],
+		[40, 55, 60, 60],
+		[40, 60, 60, 67],
+		[40, 60, 67, 72],
+		[40, 67, 72, 72],
+		[40, 72, 72, 79],
+		[40, 72, 79, 84],
+		[40, 79, 84, 84],
+		[52, 60, 60, 67],
+		[52, 60, 67, 72],
+		[52, 67, 72, 72],
+		[52, 72, 72, 79],
+		[52, 72, 79, 84],
+		[52, 79, 84, 84]
+	], 
+	
+	"V6/5/iv" : [
+		[40, 48, 55, 58],
+		[40, 55, 58, 60],
+		[40, 58, 60, 67],
+		[40, 60, 67, 70],
+		[40, 67, 70, 72],
+		[40, 70, 72, 79],
+		[40, 72, 79, 82],
+		[40, 79, 82, 84],
+		[52, 58, 60, 67],
+		[52, 60, 67, 70],
+		[52, 67, 70, 72],
+		[52, 70, 72, 79],
+		[52, 72, 79, 82],
+		[52, 79, 82, 84]
+	], 
+	
+	"V6/5/IV" : [
+		[40, 48, 55, 58],
+		[40, 55, 58, 60],
+		[40, 58, 60, 67],
+		[40, 60, 67, 70],
+		[40, 67, 70, 72],
+		[40, 70, 72, 79],
+		[40, 72, 79, 82],
+		[40, 79, 82, 84],
+		[52, 58, 60, 67],
+		[52, 60, 67, 70],
+		[52, 67, 70, 72],
+		[52, 70, 72, 79],
+		[52, 72, 79, 82],
+		[52, 79, 82, 84]
+	], 
+	
+	"V/ii" : [
+		[57, 64, 69, 73],
+		[57, 69, 73, 76],
+		[57, 73, 76, 81],
+		[57, 76, 81, 85],
+		[45, 52, 57, 61],
+		[45, 57, 61, 64],
+		[45, 61, 64, 69],
+		[45, 64, 69, 73],
+		[45, 69, 73, 76],
+		[45, 73, 76, 81],
+		[45, 76, 81, 85]
+	],
+	
+		
+	"V7/ii" : [
+		[57, 64, 67, 73],
+		[57, 67, 73, 76],
+		[57, 73, 76, 79],
+		[57, 76, 79, 85],
+		[45, 52, 55, 61],
+		[45, 55, 61, 64],
+		[45, 61, 64, 67],
+		[45, 64, 67, 73],
+		[45, 67, 73, 76],
+		[45, 73, 76, 79],
+		[45, 76, 79, 85]
+	],
+	
+	"V6/ii" : [
+		[49, 57, 57, 64],
+    	[49, 57, 64, 69],
+    	[49, 64, 69, 69],
+    	[49, 69, 69, 76],
+		[49, 69, 76, 81],
+		[49, 76, 81, 81],
+	],
+	
+	"V6/5/ii" : [
+		[49, 55, 57, 64],
+    	[49, 57, 64, 67],
+    	[49, 64, 67, 69],
+    	[49, 67, 69, 76],
+		[49, 69, 76, 79],
+		[49, 76, 79, 81],
+	],
+	
+	"V4/3/ii": [
+    	[40, 45, 49, 55],
+    	[40, 49, 55, 57],
+    	[40, 55, 57, 61],
+    	[40, 57, 61, 67],
+    	[40, 61, 67, 69],
+    	[40, 67, 69, 73],
+    	[40, 69, 73, 79],
+		[40, 73, 79, 81],
+    	[52, 55, 57, 61],
+    	[52, 57, 61, 67],
+    	[52, 61, 67, 69],
+    	[52, 67, 69, 73],
+    	[52, 69, 73, 79],
+		[52, 73, 79, 81]
+	],
+
+	"V4/2/ii": [
+    	[43, 49, 52, 57],
+    	[43, 52, 57, 61],
+    	[43, 57, 61, 64],
+    	[43, 61, 64, 69],
+    	[43, 64, 69, 73],
+    	[43, 69, 73, 76],
+		[43, 73, 76, 81],
+    	[55, 57, 61, 64],
+    	[55, 61, 64, 69],
+    	[55, 64, 69, 73],
+    	[55, 69, 73, 76],
+		[55, 73, 76, 81],
+	],
+	
+	"V/iii": [
+    	[59, 66, 71, 75],
+    	[59, 71, 75, 78],
+    	[59, 75, 78, 83],
+    	[59, 78, 83, 87],
+    	[47, 54, 59, 63],
+    	[47, 59, 63, 66],
+    	[47, 63, 66, 71],
+    	[47, 66, 71, 75],
+    	[47, 71, 75, 78],
+    	[47, 75, 78, 83]
+	],
+
+	"V7/iii": [
+    	[59, 66, 69, 75],
+    	[59, 69, 75, 78],
+    	[59, 75, 78, 81],
+    	[59, 78, 81, 87],
+    	[47, 54, 57, 63],
+    	[47, 57, 63, 66],
+    	[47, 63, 66, 69],
+    	[47, 66, 69, 75],
+    	[47, 69, 75, 78],
+    	[47, 75, 78, 81]
+	],
+
+	"V6/iii": [
+    	[51, 59, 59, 66],
+    	[51, 59, 66, 71],
+    	[51, 66, 71, 71],
+    	[51, 71, 71, 78],
+    	[51, 71, 78, 83],
+    	[51, 78, 83, 83]
+	],
+
+	"V6/5/iii": [
+    	[51, 57, 59, 66],
+    	[51, 59, 66, 69],
+    	[51, 66, 69, 71],
+    	[51, 69, 71, 78],
+    	[51, 71, 78, 81],
+    	[51, 78, 81, 83]
+	],
+	
+	"V/vi": [
+    	[52, 59, 64, 68],
+    	[52, 64, 68, 71],
+    	[52, 68, 71, 76],
+   		[52, 71, 76, 80],
+		[53, 76, 80, 83],
+    	[40, 47, 52, 56],
+    	[40, 52, 56, 59],
+    	[40, 56, 59, 64],
+    	[40, 59, 64, 68],
+    	[40, 64, 68, 71],
+    	[40, 68, 71, 76],
+    	[40, 71, 76, 80],
+		[40, 76, 80, 83],
+	],
+
+	"V7/vi": [
+    	[52, 59, 62, 68],
+    	[52, 62, 68, 71],
+    	[52, 68, 71, 74],
+    	[52, 71, 74, 80],
+		[52, 74, 80, 83],
+    	[40, 47, 50, 56],
+   		[40, 50, 56, 59],
+    	[40, 56, 59, 62],
+    	[40, 59, 62, 68],
+    	[40, 62, 68, 71],
+    	[40, 68, 71, 74],
+    	[40, 71, 74, 80],
+		[49, 74, 80, 83]
+	],
+
+	"V6/vi": [
+    	[44, 52, 52, 59],
+    	[44, 52, 59, 64],
+    	[44, 59, 64, 64],
+    	[44, 64, 64, 71],
+    	[44, 64, 71, 76],
+    	[44, 71, 76, 76],
+		[44, 76, 76, 83],
+		[56, 59, 64, 64],
+    	[56, 64, 64, 71],
+    	[56, 64, 71, 76],
+    	[56, 71, 76, 76],
+		[56, 76, 76, 83],
+	],
+
+	"V6/5/vi": [
+    	[44, 50, 52, 59],
+    	[44, 52, 59, 62],
+    	[44, 59, 62, 64],
+    	[44, 62, 64, 71],
+   		[44, 64, 71, 74],
+    	[44, 71, 74, 76],
+		[44, 74, 76, 83],
+		[56, 59, 62, 64],
+    	[56, 62, 64, 71],
+   		[56, 64, 71, 74],
+    	[56, 71, 74, 76],
+		[56, 74, 76, 83]
+	],
+
+	"V/♭III": [
+    	[58, 65, 70, 74],
+    	[58, 70, 74, 77],
+    	[58, 74, 77, 82],
+    	[58, 77, 82, 86],
+    	[46, 53, 58, 62],
+    	[46, 58, 62, 65],
+    	[46, 62, 65, 70],
+    	[46, 65, 70, 74],
+    	[46, 70, 74, 77],
+    	[46, 74, 77, 82]
+	],
+
+	"V7/♭III": [
+    	[58, 65, 68, 74],
+    	[58, 68, 74, 77],
+    	[58, 74, 77, 80],
+    	[58, 77, 80, 86],
+    	[46, 53, 56, 62],
+    	[46, 56, 62, 65],
+    	[46, 62, 65, 68],
+    	[46, 65, 68, 74],
+    	[46, 68, 74, 77],
+    	[46, 74, 77, 80]
+	],
+
+	"V6/♭III": [
+    	[50, 58, 58, 65],
+    	[50, 58, 65, 70],
+    	[50, 65, 70, 70],
+    	[50, 70, 70, 77],
+    	[50, 70, 77, 82],
+    	[50, 77, 82, 82]
+	],
+
+	"V6/5/♭III": [
+    	[50, 56, 58, 65],
+    	[50, 58, 65, 68],
+    	[50, 65, 68, 70],
+    	[50, 68, 70, 77],
+    	[50, 70, 77, 80],
+    	[50, 77, 80, 82]
+	],	
+
+	"V/♭VII": [
+    	[53, 60, 65, 69],
+    	[53, 65, 69, 72],
+    	[53, 69, 72, 77],
+    	[53, 72, 77, 81],
+    	[54, 77, 81, 84],
+    	[41, 48, 53, 57],
+    	[41, 53, 57, 60],
+    	[41, 57, 60, 65],
+    	[41, 60, 65, 69],
+    	[41, 65, 69, 72],
+    	[41, 69, 72, 77],
+    	[41, 72, 77, 81],
+    	[41, 77, 81, 84]
+	],
+
+	"V7/♭VII": [
+    	[53, 60, 63, 69],
+    	[53, 63, 69, 72],
+    	[53, 69, 72, 75],
+    	[53, 72, 75, 81],
+    	[53, 75, 81, 84],
+    	[41, 48, 51, 57],
+    	[41, 51, 57, 60],
+    	[41, 57, 60, 63],
+    	[41, 60, 63, 69],
+    	[41, 63, 69, 72],
+    	[41, 69, 72, 75],
+    	[41, 72, 75, 81],
+    	[50, 75, 81, 84]
+	],
+
+	"V6/♭VII": [
+    	[45, 53, 53, 60],
+    	[45, 53, 60, 65],
+    	[45, 60, 65, 65],
+    	[45, 65, 65, 72],
+    	[45, 65, 72, 77],
+    	[45, 72, 77, 77],
+    	[45, 77, 77, 84],
+    	[57, 60, 65, 65],
+    	[57, 65, 65, 72],
+    	[57, 65, 72, 77],
+    	[57, 72, 77, 77],
+    	[57, 77, 77, 84]
+	],
+
+	"V6/5/♭VII": [
+    	[45, 51, 53, 60],
+    	[45, 53, 60, 63],
+    	[45, 60, 63, 65],
+    	[45, 63, 65, 72],
+    	[45, 65, 72, 75],
+    	[45, 72, 75, 77],
+    	[45, 75, 77, 84],
+    	[57, 60, 63, 65],
+    	[57, 63, 65, 72],
+    	[57, 65, 72, 75],
+    	[57, 72, 75, 77],
+    	[57, 75, 77, 84]
+	],
+
+	//dimished/Whatever
 };	
 
+
+var debugCounter = 0;
+
 function chordPrevention (prevChord, newChord) { //Rules!
+	debugCounter++;
 	
+if (debugCounter > 1000) {
+		post("Infinite loop detected! Prev Chord: " + prevChord + ", New Chord: " + newChord + "\n");
+		return true; //Force invalid response to break the loop
+	}
+		
+	post("Prev Chord: " + prevChord + ", New Chord: " + newChord + "\n"); 
+			
 	if (prevChord === newChord) {
 		return true;
 	}
 	
-	if (newChord === "I" && prevChord === "ii") {
+	if ((newChord === "I" || newChord === "I+") && prevChord === "ii") {
 		return true; // No I to ii!!
 	}
 	
-	if (newChord === "I" && (prevChord === "IV" || prevChord === "IV6" || prevChord === "ii6" || prevChord === "ii6/5")) {
-		return false; // Other predoms are cool after I
-	} 
-	
-	if ((newChord === "V" || newChord === "V6") && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" ||prevChord === "V4/2")) {
+	if ((newChord === "V" || newChord === "V6" || newChord === "V+") && (prevChord === "V7" ||prevChord === "V6/5" || prevChord === "V4/3" ||prevChord === "V4/2")) {
 		return true; // V7 to V is not allowed!
 	}
 		
@@ -555,27 +1251,27 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		//Move This function later on, remove from generatechordlist
 	
 	if (newChord === "I6" && (prevChord === "V6/5" ||prevChord === "V6")) {
-		return true; //I6 cannot go to V6/5 or V6
+		return true; //V6/5 or V6 cannot go to I6
 	}	
 	
 	if (newChord === "I"  && prevChord === "V4/2") {
-		return true; //I cannot go to V4/2
+		return true; //V4/2 cannot go to I
 	}	
 	
 	if (newChord === "i6" && (prevChord === "V6/5" ||prevChord === "V6")) {
-		return true; //I6 cannot go to V6/5 or V6
+		return true; //V6/5 or V6 cannot go to i6
 	}	
 	
 	if (newChord === "i"  && prevChord === "V4/2") {
-		return true; //I cannot go to V4/2
+		return true; //V4/2 cannot go to i
 	}
 	
 	if (newChord === "Cad6/4"  && prevChord === "V4/2") {
-		return true; //Cad6/4 cannot go to V4/2
+		return true; //V4/2 cannot go to Cad6/4
 	}
 	
 	if (newChord === "Cad6/4(m)"  && prevChord === "V4/2") {
-		return true; //Cad6/4 cannot go to V4/2
+		return true; //V4/2 cannot go to Cad6/4
 	}
 	
 	if (newChord === "V6/5"  && prevChord === "V4/2") {
@@ -638,9 +1334,185 @@ function chordPrevention (prevChord, newChord) { //Rules!
 		return true;
 	}
 	
+	const onlyVafterIV7 = {"V": true, "V7": true };
+
+		if ((prevChord === "IV7" || prevChord === "iv7") && !onlyVafterIV7[newChord]) {
+		return true;
+	}
+	
+	const onlyV65afterIV65 = {"V6": true, "V6/5": true };
+
+		if ((prevChord === "IV6/5" || prevChord === "iv6/5") && !onlyV65afterIV65[newChord]) {
+		return true;
+	}
+	
+	const aug6thRules = {
+		"It+6" : { "V": true },
+		"Fr+6" : { "V": true },
+		"Ger+6" : { "Cad6/4": true, "Cad6/4(m)": true }
+	};
+	
+		if (aug6thRules[prevChord] && !aug6thRules[prevChord][newChord]) {
+		return true;
+	}
+	
+	const appliedChords = {
+		"V/V": {"V": true, "V7": true },
+        "V7/V": {"V": true, "V7": true },
+        "V6/V": {"V": true, "V7": true },
+        "V6/5/V": {"V": true, "V7": true },
+        "V4/3/V": {"V": true, "V7": true, "V6": true, "V6/5": true},
+        "V4/2/V": {"V6": true, "V6/5": true },
+        "V7/IV": {"IV": true},
+        "V6/5/IV": {"IV": true},
+		"V/iv": {"iv": true},
+        "V7/iv": {"iv": true},
+        "V6/5/iv": {"iv": true},
+        "V/ii": {"ii": true},
+        "V7/ii":  {"ii": true},
+        "V6/ii":  {"ii": true},
+        "V6/5/ii":  {"ii": true},
+        "V4/3/ii":  {"ii": true, "ii6": true, "ii6/5": true},
+        "V4/2/ii": {"ii6": true, "ii6/5": true},
+        "V/iii": {"iii": true},
+        "V7/iii": {"iii": true},
+        "V6/iii": {"iii": true},
+        "V6/5/iii": {"iii": true},
+        "V/vi": {"vi": true},
+        "V7/vi": {"vi": true},
+        "V6/vi": {"vi": true},
+        "V6/5/vi": {"vi": true},
+		"V/♭III": {"♭III": true},
+		"V7/♭III": {"♭III": true},
+		"V6/♭III": {"♭III": true},
+		"V6/5/♭III": {"♭III": true},
+		"V/♭VII": {"♭VII": true},
+		"V7/♭VII": {"♭VII": true},
+		"V6/♭VII": {"♭VII": true},
+		"V6/5/♭VII": {"♭VII": true},
+    };
+
+	if (appliedChords[prevChord] && !appliedChords[prevChord][newChord]) {
+		return true;
+	}
 	
 	return false;
 }
+
+	
+/*	if ((newChord !== "V" && newChord !== "V7") && prevChord ===  "IV7") {
+		return true; //Only V or V7 after IV7
+	}
+	
+	if ((newChord !== "V6" && newChord !== "V6/5") && prevChord ===  "IV6/5") {
+		return true;
+	}
+	
+	if ((newChord !== "V" && newChord !== "V7") && prevChord ===  "iv7") {
+		return true;
+	}
+	
+	if ((newChord !== "V6" && newChord !== "V6/5") && prevChord ===  "iv6/5") {
+		return true;
+	}
+	
+	if (newChord === "iv" && prevChord === "iv7") {
+		return true; //No triad after 7th
+	}
+
+	if (newChord === "IV" && prevChord === "IV7") {
+		return true; //No triad after 7th
+	}	
+	
+	if (newChord !== "V" && (prevChord ===  "It+6" || prevChord ===  "Fr+6")) {
+		return true; //Aug6th rules
+	}
+	
+	if ((newChord !== "Cad6/4" && newChord !== "Cad6/4(m)") && prevChord === "Ger+6"){ 
+		return true; //Aug6th rules
+	}
+	
+	if ((newChord !== "V7" && newChord !== "V" && newChord !== "I") && prevChord === "III#") {
+		return true; //Rules for III#
+	}
+	
+	if (newChord === "III#" && (prevChord !== "V" && prevChord !== "I")) {
+		return true; //Rules for III#
+	}
+	
+	if (newChord === "VI#" && (prevChord !== "I" && prevChord !== "i")) {
+		return true; //Rules for VI#
+	}
+	
+	if ((newChord !== "IV" && newChord !== "IV7" && newChord !== "iv" && newChord !== "iv7") && prevChord === "VI#") {
+		return true;
+	}
+	
+	if ((newChord !== "I" && newChord !== "vi" && newChord !== "i" && newChord !== "♭VI") && prevChord === "V+") {
+		return true; //Rules for V+
+	}
+	
+	if ((newChord !== "IV" && newChord !== "ii6" && newChord !== "ii6/5" && newChord !== "iv" && newChord !== "ii°6" && newChord !== "iiø6/5") && prevChord === "I+") {
+		return true; //Rules for I+
+	}
+	
+	if (newChord === "I+" && (prevChord !== "I" && prevChord !== "I6" && prevChord !== "i" && prevChord !== "i6" )) {
+		return true;
+	} 
+	
+	if ((newChord !== "V" && newChord !== "V7") && (prevChord === "V/V" || prevChord === "V7/V" || prevChord === "V6/V" || prevChord === "V6/5/V")) {
+		return true; //Applied Chord rules
+	}
+	
+	if ((newChord !== "V" && newChord !== "V7" && newChord !== "V6" && newChord !== "V6/5") && prevChord === "V4/3/V") {
+		return true;
+	}
+	
+	if ((newChord !== "V6" && newChord !== "V6/5") && prevChord === "V4/2/V") {
+		return true;
+	}
+	
+	if (newChord !== "IV" && (prevChord === "V7/IV" || prevChord === "V6/5/IV")) {
+		return true;
+	}
+	
+	if (newChord !== "iv" && (prevChord === "V7/iv"|| prevChord === "V6/5/iv")) {
+		return true;
+	}
+	
+	if (newChord !== "ii" && (prevChord === "V/ii" || prevChord === "V7/ii" || prevChord === "V6/ii" || prevChord === "V6/5/ii")) {
+		return true;
+	}
+	
+	if ((newChord !== "ii" && newChord !== "ii6" && newChord !== "ii6/5") && prevChord === "V4/3/ii") {
+		return true;
+	}
+	
+	if ((newChord !== "ii6" && newChord !== "ii6/5") && prevChord === "V4/2/ii") {
+		return true;
+	}
+	
+	if (newChord !== "iii" && (prevChord === "V/iii" || prevChord === "V7/iii"|| prevChord === "V6/iii" || prevChord === "V6/5/iii")) {
+		return true;
+	}
+	
+	if (newChord !== "vi" && (prevChord === "V/vi" || prevChord === "V7/vi"|| prevChord === "V6/vi" || prevChord === "V6/5/vi")) {
+		return true;
+	}
+	
+	if (newChord !== "♭III" && (prevChord === "V/♭III" || prevChord === "V7/♭III"|| prevChord === "V6/♭III" || prevChord === "V6/5/♭III")) {
+		return true;
+	}
+	
+	if ((newChord === "V/♭III" || newChord === "V7/♭III"|| newChord === "V6/♭III" || newChord === "V6/5/♭III") && prevChord === "♭VII") {
+		return true;
+	} //Since they are the same chord, making sure they do not appear in a row
+	
+	if (newChord !== "♭VII" && (prevChord === "V/♭VII" || prevChord === "V7/♭VII"|| prevChord === "V6/♭VII" || prevChord === "V6/5/♭VII")) {
+		return true;
+	}
+	
+*/	
 
 function generateChordList() {
 //This defines the function
@@ -662,7 +1534,7 @@ function generateChordList() {
 			}
 			// If the number generated is 1, and the one before it is 2, try a new iteration
 			
-			if (i > 1 && chordNumber === chordList[i - 1] && chordNumber === chordList[i - 2]) {
+			if (i > 1 && chordNumber === chordList[i - 1] && chordNumber === chordList[i - 2] && chordNumber === chordList[i - 3]) {
 				continue;
 			}
 				if ( i === 5 && chordList[4] === 2 && chordNumber === 2) {
@@ -727,9 +1599,20 @@ function generateChordList() {
 		},
 		"minor": {
 			0: ["i", "i6", "♭III", "♭VI"],
-			1: ["iv", "iv6", "ii°6", "iiø6/5"],
+			1: ["iv", "iv6", "ii°6", "iiø6/5", "♭VII"],
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "vii°7", "vii°6/5", "vii°4/3", "vii°4/2"]
-		}
+		},
+		"major+": {
+			0: ["I", "I6", "iii", "vi", "I+"],
+			1: ["IV", "IV6", "ii", "ii6", "ii6/5", "♭II6", "It+6", "Fr+6", "Ger+6",	"III#", "VI#", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V7/IV", "V6/5/IV", "V/ii", "V7/ii", "V6/ii", "V6/5/ii", "V4/3/ii", "V4/2/ii", "V/iii", "V7/iii", "V6/iii", "V6/5/iii", "V/vi", "V7/vi", "V6/vi", "V6/5/vi"],
+			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2", "V+"]
+		},
+		"minor+": {
+			0: ["i", "i6", "♭III", "♭VI"],
+			1: ["iv", "iv6", "ii°6", "iiø6/5", "♭VII", "♭II6", "It+6", "Fr+6", "Ger+6", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "V/♭III", "V7/♭III", "V6/♭III", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII"],
+			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
+		},
+		
 	}; //1 open
 	
 	var romanNumeralList = [];
@@ -740,15 +1623,15 @@ function generateChordList() {
 		var chosenRoman;
 		
 		if (i === 0) {
-			chosenRoman = currentMode === "major" ? "I" : "i"; // First chord is always root position tonic
+			chosenRoman = (currentMode === "major" || currentMode === "major+") ? "I" : "i"; // First chord is always root position tonic
 			
 		} else if (i === chordList.length -1) { //Chooses the final chord
 			
 			if (num === 0 ) {
 				do {
 			 		chosenRoman = Math.random() < 0.5 
-						? (currentMode === "major" ? "I" : "i") //If mode is major, choose I, if minor choose i
- 						: (currentMode === "major" ? "I6" : "i6");
+						? ((currentMode === "major" || currentMode === "major+") ? "I" : "i") //If mode is major, choose I, if minor choose i
+ 						: ((currentMode === "major" || currentMode === "major+") ? "I6" : "i6");
 					} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			
 			} else if (num === 2) {
@@ -768,7 +1651,9 @@ function generateChordList() {
 					}
 				}
 				do {
-					chosenRoman = Math.random() < 0.3 ? "Cad6/4" : filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
+					chosenRoman = Math.random() < 0.3 
+						? ((currentMode === "major" || currentMode === "major+") ? "Cad6/4" : "Cad6/4(m)")
+						: filteredOptions[Math.floor(Math.random() * filteredOptions.length)];
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			} else {
 				do {
@@ -778,7 +1663,7 @@ function generateChordList() {
 			}
 			} else if (i === chordList.length - 2 && finalCadence [0] === 1) {
 				do {
-					chosenRoman = currentMode === "major" ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
+					chosenRoman = (currentMode === "major" || currentMode === "major+") ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 				
 			} else if (i === chordList.length - 2 && finalCadence[0] === 2) {
@@ -807,11 +1692,11 @@ function generateChordList() {
 		if (seventhChord === "V" || seventhChord === "V7") {
 			do {
 			eighthChord = Math.random() < 0.5 
-				? (currentMode === "major" ? "I" : "i")
- 				: (currentMode === "major" ? "I6" : "i6");
+				? ((currentMode === "major" || currentMode === "major+") ? "I" : "i")
+ 				: ((currentMode === "major" || currentMode === "major+") ? "I6" : "i6");
 			} while (chordPrevention(romanNumeralList[6], eighthChord));
 		} else if (seventhChord === "V4/2") {
-			eighthChord = currentMode === "major" ? "I6" : "i6";
+			eighthChord = (currentMode === "major" || currentMode === "major+") ? "I6" : "i6";
 		}
 		
 		romanNumeralList[6] = seventhChord;
@@ -910,19 +1795,22 @@ function assignMIDI(chordList) {
 	for (var index = 0; index < chordList.length; index++) {//Index is used for numerical placement, loops through each chord
 		var chord = chordList[index];
 		
-		if (index === 0 && (chord === "I" || chord === "i")) { //First chord is one of these voicing options!
-			var firstChordOptions = currentMode === "major" 
-				? [
-					[48, 60, 64, 67],
-					[48, 64, 67, 72],
-					[48, 67, 72, 76]
-				]
-				: [
-					[48, 60, 63, 67],
-					[48, 63, 67, 72],
-					[48, 67, 72, 75]
-				];
-			
+	 if (index === 0 && (chord === "I" || chord === "i")) {
+        // First chord is one of these voicing options
+        var firstChordOptions = (currentMode === "major" || currentMode === "major+")
+            ? [
+                [48, 60, 64, 67], // I (Major)
+                [48, 64, 67, 72], // I6 (Major)
+                [48, 67, 72, 76]  // I6/4 (Major)
+            ]
+            : (currentMode === "minor" || currentMode === "minor+")
+                ? [
+                    [48, 60, 63, 67], // i (Minor)
+                    [48, 63, 67, 72], // i6 (Minor)
+                    [48, 67, 72, 75]  // i6/4 (Minor)
+                ]
+                : [];
+
 			var selectedVoicing = firstChordOptions[Math.floor(Math.random() * firstChordOptions.length)]; //Randomly choose one of the three voicings.
 			midiList.push(selectedVoicing);
 		}
@@ -956,7 +1844,7 @@ function assignMIDI(chordList) {
 					
 					
 				closestVoicing = dropSol(prevVoicing, closestVoicing); 	
-				midiList.push(closestVoicing) //Return the closest voicing
+				midiList.push(closestVoicing); //Return the closest voicing
 			} else {
             	midiList.push([0]); // Default fallback for unknown chords
         	}
