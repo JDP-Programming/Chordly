@@ -1334,7 +1334,7 @@ if (debugCounter > 1000) {
 		return true;
 	}
 	
-	const onlyVafterIV7 = {"V": true, "V7": true };
+/*	const onlyVafterIV7 = {"V": true, "V7": true };
 
 		if ((prevChord === "IV7" || prevChord === "iv7") && !onlyVafterIV7[newChord]) {
 		return true;
@@ -1395,10 +1395,60 @@ if (debugCounter > 1000) {
 	if (appliedChords[prevChord] && !appliedChords[prevChord][newChord]) {
 		return true;
 	}
+	*/
 	
-	return false;
-}
-
+	const allowedProgressions = {
+		"IV7": ["V", "V7"],
+		"IV6/5": ["V6", "V6/5"],
+		"iv7": ["V", "V7"],
+		"iv6/5": ["V6", "V6/5"],
+		"It+6": ["V"],
+		"Fr+6": ["V"],
+		"Ger+6": ["Cad6/4", "Cad6/4(m)"],
+		"V/V": ["V", "V7"],
+        "V7/V": ["V", "V7"],
+        "V6/V": ["V", "V7"],
+        "V6/5/V": ["V", "V7"],
+        "V4/3/V": ["V", "V7","V6","V6/5"],
+        "V4/2/V": ["V6","V6/5"],
+        "V7/IV": ["IV"],
+        "V6/5/IV": ["IV"],
+		"V/iv": ["iv"],
+        "V7/iv": ["iv"],
+        "V6/5/iv": ["iv"],
+        "V/ii": ["ii"],
+        "V7/ii":  ["ii"],
+        "V6/ii":  ["ii"],
+        "V6/5/ii":  ["ii"],
+        "V4/3/ii":  ["ii", "ii6", "ii6/5"],
+        "V4/2/ii": ["ii6", "ii6/5"],
+        "V/iii": ["iii"],
+        "V7/iii": ["iii"],
+        "V6/iii": ["iii"],
+        "V6/5/iii": ["iii"],
+        "V/vi": ["vi"],
+        "V7/vi": ["vi"],
+        "V6/vi": ["vi"],
+        "V6/5/vi": ["vi"],
+		"V/♭III": ["♭III"],
+		"V7/♭III": ["♭III"],
+		"V6/♭III": ["♭III"],
+		"V6/5/♭III": ["♭III"],
+		"V/♭VII": ["♭VII"],
+		"V7/♭VII": ["♭VII"],
+		"V6/♭VII": ["♭VII"],
+		"V6/5/♭VII": ["♭VII"],
+	};
+	
+	if (allowedProgressions[prevChord]) {
+		for (var i = 0; i < allowedProgressions[prevChord].length; i++) {
+			if (allowedProgressions[prevChord][i] === newChord) {
+				return false;
+			}
+		}
+		return true;
+	}
+		
 	
 /*	if ((newChord !== "V" && newChord !== "V7") && prevChord ===  "IV7") {
 		return true; //Only V or V7 after IV7
@@ -1511,8 +1561,9 @@ if (debugCounter > 1000) {
 	if (newChord !== "♭VII" && (prevChord === "V/♭VII" || prevChord === "V7/♭VII"|| prevChord === "V6/♭VII" || prevChord === "V6/5/♭VII")) {
 		return true;
 	}
-	
-*/	
+*/
+	return false;
+}
 
 function generateChordList() {
 //This defines the function
