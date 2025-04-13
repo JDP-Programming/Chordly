@@ -90,7 +90,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[39, 58, 63, 67],
 		[39, 63, 67, 70],
 		[39, 67, 70, 75],
-		[39, 70, 76, 82],
+		[39, 70, 75, 82],
 		[51, 58, 63, 67],
 		[51, 63, 67, 70],
 		[51, 67, 70, 75],
@@ -1078,7 +1078,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[56, 74, 76, 83]
 	],
 
-	"V/♭III": [
+	"V7/♭VI": [
     	[58, 65, 70, 74],
     	[58, 70, 74, 77],
     	[58, 74, 77, 82],
@@ -1092,25 +1092,33 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 
 	"V7/♭III": [
-    	[58, 65, 68, 74],
-    	[58, 68, 74, 77],
-    	[58, 74, 77, 80],
-    	[58, 77, 80, 86],
-    	[46, 53, 56, 62],
-    	[46, 56, 62, 65],
-    	[46, 62, 65, 68],
-    	[46, 65, 68, 74],
-    	[46, 68, 74, 77],
-    	[46, 74, 77, 80]
+		[46, 53, 56, 62],
+		[46, 56, 62, 65],
+		[46, 62, 65, 68],
+		[46, 65, 68, 74],
+		[46, 68, 74, 77],
+		[46, 74, 77, 80],
+		[58, 62, 65, 70],
+		[58, 65, 70, 74],
+		[58, 70, 74, 77],
+		[58, 74, 77, 80],
+		[58, 77, 80, 86],
+
 	],
 
-	"V6/♭III": [
-    	[50, 58, 58, 65],
-    	[50, 58, 65, 70],
-    	[50, 65, 70, 70],
-    	[50, 70, 70, 77],
-    	[50, 70, 77, 82],
-    	[50, 77, 82, 82]
+	"V6/5/♭VI": [
+		[43, 49, 51, 58],
+		[43, 51, 58, 61],
+		[43, 58, 61, 63],
+		[43, 61, 63, 70],
+		[43, 63, 70, 73],
+		[43, 70, 73, 75],
+		[43, 73, 75, 82],
+		[55, 58, 61, 63],
+		[55, 61, 63, 70],
+		[55, 63, 70, 73],
+		[55, 70, 73, 75],
+		[55, 73, 75, 82],
 	],
 
 	"V6/5/♭III": [
@@ -1808,12 +1816,12 @@ function generateChordList() {
 		},
 		"major+": {
 			0: ["I", "I6", "iii", "vi", "I+", "III#", "VI#"],
-			1: ["IV", "IV6", "ii", "ii6", "ii6/5", "♭II6", "It+6", "Fr+6", "III#", "VI#", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V7/IV", "V6/5/IV", "V/ii", "V7/ii", "V6/ii", "V6/5/ii", "V4/3/ii", "V4/2/ii", "V/iii", "V7/iii", "V6/iii", "V6/5/iii", "V/vi", "V7/vi", "V6/vi", "V6/5/vi", "vii°6/V", "vii°7/V", "viiø7/V","vii°6/IV", "vii°7/IV", "viiø7/IV","vii°6/ii", "vii°7/ii","vii°6/iii", "vii°7/iii",,"vii°6/vi", "vii°7/vi"],
+			1: ["IV", "IV6", "IV7", "IV6/5", "ii", "ii6", "ii6/5", "♭II6", "It+6", "Fr+6", "III#", "VI#", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V7/IV", "V6/5/IV", "V/ii", "V7/ii", "V6/ii", "V6/5/ii", "V4/3/ii", "V4/2/ii", "V/iii", "V7/iii", "V6/iii", "V6/5/iii", "V/vi", "V7/vi", "V6/vi", "V6/5/vi", "vii°6/V", "vii°7/V", "viiø7/V","vii°6/IV", "vii°7/IV", "viiø7/IV","vii°6/ii", "vii°7/ii","vii°6/iii", "vii°7/iii","vii°6/vi", "vii°7/vi"],
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2", "V+"]
 		},
 		"minor+": {
 			0: ["i", "i6", "♭III", "♭VI"],
-			1: ["iv", "iv6", "ii°6", "iiø6/5", "♭VII", "♭II6", "It+6", "Fr+6", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "V/♭III", "V7/♭III", "V6/♭III", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
+			1: ["iv", "iv6", "iv7", "iv6/5", "ii°6", "iiø6/5", "♭VII", "♭II6", "It+6", "Fr+6", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "V7/♭VI", "V7/♭III", "V6/5/♭VI", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
 		},
 		
@@ -1856,9 +1864,9 @@ function generateChordList() {
         			"V7/vi": ["vi"],
         			"V6/vi": ["vi"],
         			"V6/5/vi": ["vi"],
-					"V/♭III": ["♭III"],
+					"V7/♭VI": ["♭VI"],
 					"V7/♭III": ["♭III"],
-					"V6/♭III": ["♭III"],
+					"V6/5/♭VI": ["♭VI"],
 					"V6/5/♭III": ["♭III"],
 					"V/♭VII": ["♭VII"],
 					"V7/♭VII": ["♭VII"],
@@ -1891,7 +1899,13 @@ function generateChordList() {
 	
 	for (var i = 0; i < chordList.length; i++) {
 		var num = chordList[i];
-		var options = chordOptions[currentMode][num];
+		
+		var baseMode = currentMode; 
+		if ((currentMode === "major+" || currentMode === "minor+") && i >= 5) {
+			baseMode = currentMode === "major+" ? "major" : "minor";
+		} //Last 3 chords are in easy mode to ensure cadences
+		
+		var options = chordOptions[baseMode][num];
 		var chosenRoman;
 		
 		if (i === 0) {
@@ -1909,7 +1923,7 @@ function generateChordList() {
 			} else {
 				do {
 					chosenRoman = options[Math.floor(Math.random() * options.length)]; //Logic for other chords
-				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); //After this, add logic that prevents Major+/minor+ chords towards the end
 			}
 		} else if (i === 5 && num === 0) {
 				do {
@@ -1929,6 +1943,7 @@ function generateChordList() {
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 		} else if (i >= 1) {
         	// Check if the previous chord forces an challenge chord
+			// Solutions: Have tw
         	var previousChord = romanNumeralList[i - 1];
 
         	if (allowedProgressions.hasOwnProperty(previousChord)) {
