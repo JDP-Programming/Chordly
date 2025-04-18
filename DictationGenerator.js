@@ -6,7 +6,7 @@ outlets = 2;
 	//	1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
 	//	2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2"]
 	
-var currentMode = "Major";
+var currentMode = "The Works";
 
 function msg_int(val) {
 	if (inlet === 1) {
@@ -18,7 +18,10 @@ function msg_int(val) {
 			currentMode = "major+";
 		} else if (val === 3) {
 			currentMode = "minor+";
+		} else if (val === 4) {
+			currentMode = "The Works"; 
 		}
+		post("currentMode set to: " + currentMode + "\n");
 	}
 }
 	
@@ -53,7 +56,10 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[51, 60, 63, 67],
 		[51, 63, 67, 72],
 		[51, 67, 72, 75],
-		[51, 72, 75, 84]
+		[51, 72, 75, 84],
+		[63, 63, 67, 72],
+		[63, 67, 72, 75],
+		[63, 72, 75, 84]
 	],
 	
 	"Cad6/4(m)" : [
@@ -249,13 +255,13 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[48, 60, 64, 67],
 		[48, 64, 67, 72],
 		[48, 67, 72, 76],
+		[48, 72, 76, 79],
+		[48, 76, 79, 84],
 		[60, 60, 64, 67],
 		[60, 64, 67, 72],
 		[60, 67, 72, 76],
 		[60, 72, 76, 79],
-		[60, 76, 79, 84],
-		[48, 72, 76, 79],
-		[48, 76, 79, 84]
+		[60, 76, 79, 84]
 	],
 	
 	"I6": [
@@ -270,7 +276,10 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[52, 60, 64, 67],
 		[52, 64, 67, 72],
 		[52, 67, 72, 76],
-		[52, 72, 76, 84]
+		[52, 72, 76, 84],
+		[64, 64, 67, 72],
+		[64, 67, 72, 76],
+		[64, 72, 76, 84]
 	],
 	
 	"Cad6/4" : [
@@ -282,7 +291,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[43, 67, 72, 76],
 		[43, 60, 64, 67],
 		[43, 64, 67, 72],
-		[43, 66, 72, 76],
+		[43, 67, 72, 76],
 		[43, 72, 76, 79],
 		[43, 76, 79, 84],
 		[43, 72, 76, 79],
@@ -680,6 +689,7 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 	
 	"VI#" : [
+		[57, 61, 64, 69],
 		[57, 64, 69, 73],
 		[57, 69, 73, 76],
 		[57, 73, 76, 81],
@@ -1722,7 +1732,148 @@ if (debugCounter > 1000) {
 		return true;
 	}
 	
+	
+	if (newChord === "I" && prevChord === "i") {
+		return true;
+	}
 
+	if (newChord === "i" && prevChord === "I") {
+		return true;
+	}
+	
+	if (newChord === "I6" && prevChord === "i6") {
+		return true;
+	}
+
+	if (newChord === "i6" && prevChord === "I6") {
+		return true;
+	}
+	
+	if (newChord === "I" && prevChord === "i6") {
+		return true;
+	}
+
+	if (newChord === "i6" && prevChord === "I") {
+		return true;
+	}
+	
+	if (newChord === "I6" && prevChord === "i") {
+		return true;
+	}
+
+	if (newChord === "i" && prevChord === "I6") {
+		return true;
+	}
+	
+	if (newChord === "Cad6/4(m)" && prevChord === "i") {
+		return true;
+	}
+
+	if (newChord === "i" && prevChord === "Cad6/4(m)") {
+		return true;
+	}
+	
+	if (newChord === "Cad6/4(m)" && prevChord === "i6") {
+		return true;
+	}
+
+	if (newChord === "i6" && prevChord === "Cad6/4(m)") {
+		return true;
+	}
+	
+	if (newChord ==="Cad6/4(m)" && prevChord === "Cad6/4") {
+		return true;
+	}
+
+	if (newChord === "Cad6/4" && prevChord === "Cad6/4(m)") {
+		return true;
+	}
+	
+	if (newChord === "Cad6/4" && prevChord === "i") {
+		return true;
+	}
+
+	if (newChord === "i" && prevChord === "Cad6/4") {
+		return true;
+	}
+	
+	if (newChord === "Cad6/4" && prevChord === "i6") {
+		return true;
+	}
+
+	if (newChord === "i6" && prevChord === "Cad6/4") {
+		return true;
+	}
+	
+	if ((newChord === "I" || newChord === "I6" || newChord === "i" || newChord === "i6" || newChord === "Cad6/4(m(" || newChord === "Cad6/4") && prevChord === "I+") {
+		return true;
+	}
+	
+	if (newChord === "I+" && (prevChord === "I" || prevChord === "I6" || prevChord === "i" || prevChord === "i6")) {
+		return true;
+	}
+	
+	if (newChord === "IV" && prevChord === "iv") {
+		return true;
+	}
+	
+	if (newChord === "IV6" && prevChord === "iv6") {
+		return true;
+	}
+	
+	if (newChord === "IV&" && prevChord === "iv7") {
+		return true;
+	}
+	
+	if (newChord === "♭III" && (prevChord === "iii" || prevChord === "III#")) {
+		return true;
+	}
+
+	if (newChord === "iii" && (prevChord === "♭III" || prevChord === "III#")) {
+		return true;
+	}
+	
+	
+	if (newChord === "III#" && (prevChord === "♭III" || prevChord === "iii")) {
+		return true;
+	}
+
+	if (newChord === "♭VI" && (prevChord === "vi" || prevChord === "VI#")) {
+		return true;
+	}
+
+	if (newChord === "vi" && (prevChord === "♭VI" || prevChord === "VI#")) {
+		return true;
+	}
+	
+	
+	if (newChord === "VI#" && (prevChord === "♭VI" || prevChord === "vi")) {
+		return true;
+	}
+
+	if ((newChord === "ii°6" || newChord === "iiø6/5") && (prevChord === "ii" || prevChord === "ii6" || prevChord === "ii6/5")) {
+		return true;
+	}
+	
+	if ((newChord === "ii" || newChord === "ii6" || newChord === "ii6/5") && (prevChord === "ii°6" || prevChord === "iiø6/5")) {
+		return true;
+	}
+	
+	if (newChord === "ii" && prevChord === "♭II6") {
+		return true;
+	}
+	
+	if (newChord === "♭II6" && prevChord === "ii6") {
+		return true;
+	}
+	
+	if ((newChord === "viiø7" || newChord ===  "viiø6/5" || newChord === "viiø4/3" || newChord === "viiø4/2") && (prevChord === "vii°7" || prevChord === "vii°6/5" || prevChord === "vii°4/3" || prevChord === "vii°4/2")) {
+		return true;
+	}
+		
+	if ((newChord === "vii°7" || newChord === "vii°6/5" || newChord === "vii°4/3" || newChord === "vii°4/2") && (prevChord === "viiø7" || prevChord ===  "viiø6/5" || prevChord === "viiø4/3" || prevChord === "viiø4/2")) {
+		return true;
+	}
 	return false;
 }
 
@@ -1821,10 +1972,14 @@ function generateChordList() {
 		},
 		"minor+": {
 			0: ["i", "i6", "♭III", "♭VI"],
-			1: ["iv", "iv6", "iv7", "iv6/5", "ii°6", "iiø6/5", "♭VII", "♭II6", "It+6", "Fr+6", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "V7/♭VI", "V7/♭III", "V6/5/♭VI", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
+			1: ["iv", "iv6", "iv7", "iv6/5", "ii°6", "iiø6/5", "♭VII", "♭II6", "It+6", "Fr+6", "V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "vii°6/V", "vii°7/V", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "vii°6/iv", "vii°7/iv", "V7/♭VI", "V7/♭III", "V6/5/♭VI", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
 		},
-		
+		"The Works" : {
+			0: ["I", "I6", "iii", "vi", "I+", "III#", "VI#", "i", "i6", "♭III", "♭VI"],
+			1: ["IV", "IV6", "IV7", "IV6/5", "ii", "ii6", "ii6/5", "♭II6", "It+6", "Fr+6","V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V7/IV", "V6/5/IV", "V/ii", "V7/ii", "V6/ii", "V6/5/ii", "V4/3/ii", "V4/2/ii", "V/iii", "V7/iii", "V6/iii", "V6/5/iii", "V/vi", "V7/vi", "V6/vi", "V6/5/vi", "vii°6/V", "vii°7/V", "viiø7/V","vii°6/IV", "vii°7/IV", "viiø7/IV", "vii°6/ii", "vii°7/ii","vii°6/iii", "vii°7/iii","vii°6/vi", "vii°7/vi", "iv", "iv6", "iv7", "iv6/5", "ii°6", "iiø6/5", "♭VII", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "vii°6/iv", "vii°7/iv", "V7/♭VI", "V7/♭III", "V6/5/♭VI", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
+			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2","vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
+		},
 	}; //1 open
 	
 	var romanNumeralList = [];
@@ -1897,27 +2052,44 @@ function generateChordList() {
 					"viiø7/♭VII": ["♭VII"]
     			};
 	
-	for (var i = 0; i < chordList.length; i++) {
+	for (var i = 0; i < chordList.length; i++) { 
 		var num = chordList[i];
+		baseMode = currentMode; 
 		
-		var baseMode = currentMode; 
-		if ((currentMode === "major+" || currentMode === "minor+") && i >= 5) {
-			baseMode = currentMode === "major+" ? "major" : "minor";
-		} //Last 3 chords are in easy mode to ensure cadences
+		if ((currentMode === "major+" || currentMode === "minor+" || currentMode === "The Works") && i >= 4) {
+			if (currentMode === "major+" || (currentMode === "The Works" && Math.random() < 0.5)) {
+				baseMode = "major";
+			}else {
+				baseMode = "minor";
+			}
+		} else {
+			baseMode = currentMode;
+		} //Last three chords are in easy mode to ensure cadences 
+	
 		
 		var options = chordOptions[baseMode][num];
+	//	post("currentMode: " + currentMode + ", baseMode: " + baseMode + ", num: " + num + "\n");
 		var chosenRoman;
 		
 		if (i === 0) {
-			chosenRoman = (currentMode === "major" || currentMode === "major+") ? "I" : "i"; // First chord is always root position tonic
-			
+			if (currentMode === "The Works") {
+				chosenRoman = (Math.random() < 0.5) ? "I" : "i";
+			} else {
+				chosenRoman = (currentMode === "major" || currentMode === "major+" ) ? "I" : "i"; // First chord is always root position tonic
+			}
+			 
 		} else if (i === chordList.length -1) { //Chooses the final chord
 			if (num === 0 ) {
 				do {
-			 		chosenRoman = Math.random() < 0.5 
-						? ((currentMode === "major" || currentMode === "major+") ? "I" : "i") //If mode is major, choose I, if minor choose i
- 						: ((currentMode === "major" || currentMode === "major+") ? "I6" : "i6");
-					} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
+					if (currentMode === "The Works") {
+						var tonicOptions = ["I", "i", "I6", "i6"];
+						chosenRoman = tonicOptions[Math.floor(Math.random() * tonicOptions.length)];
+					} else {
+			 			chosenRoman = Math.random() < 0.5 
+							? ((currentMode === "major" || currentMode === "major+") ? "I" : "i") //If mode is major, choose I, if minor choose i
+ 							: ((currentMode === "major" || currentMode === "major+") ? "I6" : "i6");
+						}
+				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			} else if (num === 2) {
 				chosenRoman = "V"; 	//Final chord logic
 			} else {
@@ -1927,15 +2099,25 @@ function generateChordList() {
 			}
 		} else if (i === 5 && num === 0) {
 				do {
-					chosenRoman = Math.random() < 0.3 
-						? ((currentMode === "major" || currentMode === "major+") ? "Cad6/4" : "Cad6/4(m)")
-						: options[Math.floor(Math.random() * options.length)];
+					if (currentMode === "The Works") {
+						chosenRoman = Math.random() <  0.3
+							? (Math.random() < 0.5 ? "Cad6/4" : "Cad6/4(m)")
+							: options[Math.floor(Math.random() * options.length)];
+					} else {
+						chosenRoman = Math.random() < 0.3 
+							? ((currentMode === "major" || currentMode === "major+") ? "Cad6/4" : "Cad6/4(m)")
+							: options[Math.floor(Math.random() * options.length)];
+						}
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			} else if (i === chordList.length - 2 && finalCadence [0] === 1) {
 				do {
-					chosenRoman = (currentMode === "major" || currentMode === "major+") ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
+					if (currentMode === "The Works") {
+						chosenRoman = (Math.random() < 0.5 ? "IV" : "iv");
+					} else {
+						chosenRoman = (currentMode === "major" || currentMode === "major+") ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
+					}
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
-				
+
 			} else if (i === chordList.length - 2 && finalCadence[0] === 2) { // Looking at the second to last chord to ensure a proper cadence
 				var dominantChords = ["V", "V7", "V6", "V6/5", "V4/3", "V4/2"];
 				do {	
@@ -1970,7 +2152,7 @@ function generateChordList() {
 	
 	if (romanNumeralList[5] == "Cad6/4" || romanNumeralList[5] === "Cad6/4(m)") {
 		
-		if ((currentMode === "major+" || currentMode === "minor+") && !(romanNumeralList[3] in allowedProgressions)) {
+		if ((currentMode === "major+" || currentMode === "minor+" || currentMode === "The Works") && !(romanNumeralList[3] in allowedProgressions)) {
 			if (Math.random() < 0.3) {
 				romanNumeralList[4] = "Ger+6";
 			}
@@ -1985,11 +2167,11 @@ function generateChordList() {
 		if (seventhChord === "V" || seventhChord === "V7") {
 			do {
 			eighthChord = Math.random() < 0.5 
-				? ((currentMode === "major" || currentMode === "major+") ? "I" : "i")
- 				: ((currentMode === "major" || currentMode === "major+") ? "I6" : "i6");
+				? ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I" : "i")
+ 				: ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I6" : "i6");
 			} while (chordPrevention(romanNumeralList[6], eighthChord));
 		} else if (seventhChord === "V4/2") {
-			eighthChord = (currentMode === "major" || currentMode === "major+") ? "I6" : "i6";
+			eighthChord = (currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I6" : "i6";
 		}
 		
 		romanNumeralList[6] = seventhChord;
@@ -2006,7 +2188,7 @@ function assignMIDI(chordList) {
     var midiList = []; 
 	
 	function hasParallel5thsor8ves(prevVoicing, currentVoicing) {
-		
+		if (!prevVoicing || !currentVoicing) return false; //Failsafe 
 		for (var i = 0; i < Math.min(prevVoicing.length, currentVoicing.length); i++) {
 			for (var j = i + 1; j < Math.min(prevVoicing.length, currentVoicing.length); j++) { //This checks each distinct voice pair)
 				var prevInterval = Math.abs(prevVoicing[i] - prevVoicing[j]);
@@ -2044,6 +2226,7 @@ function assignMIDI(chordList) {
 	}
 	
 	function hasVCross(prevVoicing, currentVoicing) {
+		if (!prevVoicing || !currentVoicing) return false; 
 		for (var i = 0; i < prevVoicing.length; i++) { 
 			for (var j = i + 1;  j < prevVoicing.length; j++) {//Check each voice pair (i and j)
 			
@@ -2061,6 +2244,7 @@ function assignMIDI(chordList) {
 	}
 
 	function hasBigBass(prevVoicing, currentVoicing) {
+		if (!prevVoicing || !currentVoicing) return false; 
 		var prevBass = prevVoicing[0]; //Lowest note in previous chord
 		var currentBass = currentVoicing[0]; //Lowest note in the current chord
 		
@@ -2075,6 +2259,7 @@ function assignMIDI(chordList) {
 
 
 	function dropSol(prevVoicing, currentVoicing) {
+		if (!prevVoicing || !currentVoicing) return false; 
 		var prevBass = prevVoicing[0]; //Lowest note in previous chord
 		var currentBass = currentVoicing[0]; //Lowest note in the current chord
 		
@@ -2093,20 +2278,23 @@ function assignMIDI(chordList) {
 		
 	 if (index === 0 && (chord === "I" || chord === "i")) {
         // First chord is one of these voicing options
-        var firstChordOptions = (currentMode === "major" || currentMode === "major+")
-            ? [
-                [48, 60, 64, 67], // I (Major)
+
+		var firstChordOptions = [];
+		
+		if (chord === "I") {
+			firstChordOptions = [
+				[48, 60, 64, 67], // I (Major)
                 [48, 64, 67, 72], // I6 (Major)
                 [48, 67, 72, 76]  // I6/4 (Major)
-            ]
-            : (currentMode === "minor" || currentMode === "minor+")
-                ? [
-                    [48, 60, 63, 67], // i (Minor)
-                    [48, 63, 67, 72], // i6 (Minor)
-                    [48, 67, 72, 75]  // i6/4 (Minor)
-                ]
-                : [];
+            ];
 
+		} else if (chord === "i") {
+			firstChordOptions = [
+				[48, 60, 63, 67], // i (Minor)
+                [48, 63, 67, 72], // i6 (Minor)
+                [48, 67, 72, 75]  // i6/4 (Minor)
+            ];
+        }
 			var selectedVoicing = firstChordOptions[Math.floor(Math.random() * firstChordOptions.length)]; //Randomly choose one of the three voicings.
 			midiList.push(selectedVoicing);
 		}
