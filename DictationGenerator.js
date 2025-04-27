@@ -1,6 +1,6 @@
 
-inlets = 2;
-outlets = 2;
+inlets = 5;
+outlets = 9;
 
 	//	0: ["I", "I6", "iii", "vi"],
 	//	1: ["IV", "IV6", "ii", "ii6", "ii6/5"],
@@ -20,8 +20,9 @@ function msg_int(val) {
 			currentMode = "minor+";
 		} else if (val === 4) {
 			currentMode = "The Works"; 
+		} else if (val === 5) {
+			currentMode = "Custom";
 		}
-		post("currentMode set to: " + currentMode + "\n");
 	}
 }
 	
@@ -340,11 +341,6 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 	],
 	
 	"IV": [
-		[53, 60, 65, 69],
-		[53, 65, 69, 72],
-		[53, 69, 72, 77],
-		[53, 72, 77, 81],
-		[53, 77, 81, 84],
 		[41, 48, 53, 57],
 		[41, 53, 57, 60],
 		[41, 57, 60, 65],
@@ -352,7 +348,12 @@ var chordVoicings = { //Low bass, low harm OR high bass, high harm OR low bass, 
 		[41, 65, 69, 72],
 		[41, 69, 72, 77],
 		[41, 72, 77, 81],
-		[41, 77, 81, 84]
+		[41, 77, 81, 84],
+		[53, 60, 65, 69],
+		[53, 65, 69, 72],
+		[53, 69, 72, 77],
+		[53, 72, 77, 81],
+		[53, 77, 81, 84]
 	],	
 	
 	"IV6": [
@@ -1980,7 +1981,38 @@ function generateChordList() {
 			1: ["IV", "IV6", "IV7", "IV6/5", "ii", "ii6", "ii6/5", "♭II6", "It+6", "Fr+6","V/V", "V7/V", "V6/V", "V6/5/V", "V4/3/V", "V4/2/V", "V7/IV", "V6/5/IV", "V/ii", "V7/ii", "V6/ii", "V6/5/ii", "V4/3/ii", "V4/2/ii", "V/iii", "V7/iii", "V6/iii", "V6/5/iii", "V/vi", "V7/vi", "V6/vi", "V6/5/vi", "vii°6/V", "vii°7/V", "viiø7/V","vii°6/IV", "vii°7/IV", "viiø7/IV", "vii°6/ii", "vii°7/ii","vii°6/iii", "vii°7/iii","vii°6/vi", "vii°7/vi", "iv", "iv6", "iv7", "iv6/5", "ii°6", "iiø6/5", "♭VII", "V/iv", "V7/iv", "V6/iv", "V6/5/iv", "vii°6/iv", "vii°7/iv", "V7/♭VI", "V7/♭III", "V6/5/♭VI", "V6/5/♭III", "V/♭VII", "V7/♭VII", "V6/♭VII", "V6/5/♭VII", "vii°6/♭III", "vii°7/♭III", "viiø7/♭III", "vii°6/♭VI", "vii°7/♭VI", "viiø7/♭VI", "vii°6/♭VII", "vii°7/♭VII", "viiø7/♭VII"],
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2","vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
 		},
-	}; //1 open
+		"Custom" : {
+			0: [],
+			1: [],
+			2: [],
+		},
+	};
+	
+	function customList() {
+		var val = arrayfromargs(arguments);
+		  post("Received in inlet " + inlet + ": " + val.join(", ") + "\n");
+		
+		val = val.filter(function(item) { //Removes extra emptys
+    		return item !== "empty";
+		post(val);
+		});
+
+		
+		if (inlet === 2) {
+			chordOptions["Custom"][0] = val;
+			 post("Custom[0]: " + val.join(", ") + "\n");
+		}
+		
+		if (inlet === 3) {
+			chordOptions["Custom"][1] = val;
+			 post("Custom[0]: " + val.join(", ") + "\n");
+		}
+		
+		if (inlet === 4) {
+			chordOptions["Custom"][2] = val;
+			 post("Custom[0]: " + val.join(", ") + "\n");
+		}
+	}
 	
 	var romanNumeralList = [];
 	
@@ -2125,7 +2157,6 @@ function generateChordList() {
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 		} else if (i >= 1) {
         	// Check if the previous chord forces an challenge chord
-			// Solutions: Have tw
         	var previousChord = romanNumeralList[i - 1];
 
         	if (allowedProgressions.hasOwnProperty(previousChord)) {
@@ -2153,7 +2184,7 @@ function generateChordList() {
 	if (romanNumeralList[5] == "Cad6/4" || romanNumeralList[5] === "Cad6/4(m)") {
 		
 		if ((currentMode === "major+" || currentMode === "minor+" || currentMode === "The Works") && !(romanNumeralList[3] in allowedProgressions)) {
-			if (Math.random() < 0.3) {
+			if (Math.random() < 0.4) {
 				romanNumeralList[4] = "Ger+6";
 			}
 		} //Ger+6 logic
@@ -2298,7 +2329,6 @@ function assignMIDI(chordList) {
 			var selectedVoicing = firstChordOptions[Math.floor(Math.random() * firstChordOptions.length)]; //Randomly choose one of the three voicings.
 			midiList.push(selectedVoicing);
 		}
-		
 		else if (index > 0) { //For the other chords
 			//var prevChord = chordList[index - 1]; //Get previous RN
 			var prevVoicing = midiList[index - 1]; //Get previous voicing
@@ -2345,6 +2375,76 @@ function assignMIDI(chordList) {
 function bang () {
 	var romanNumeralList = generateChordList(); // gets the list
 	var midiChordList = assignMIDI(romanNumeralList);	
+	var oneMidiList = [].concat.apply([], midiChordList);
+	
+	var changedKey =  Math.floor(Math.random() * 13) - 4; //Random key change
+	
+	var majTonic = ["chord", 48, 64, 55, 64, 60, 64, 64, 64]; //For I-IV-V7-I
+	var majPre = ["chord", 41, 64, 57, 64, 60, 64, 65, 64];
+	var domV = ["chord", 43, 64, 55, 64, 59, 64, 62, 64];
+	var minTonic = ["chord", 48, 64, 55, 64, 60, 64, 63, 64];
+	var minPre = ["chord", 41, 64, 56, 64, 60, 64, 65, 64];
+	
+	var transposedMidiList = oneMidiList.map(function(num) {
+		return num + changedKey;
+		
+	});
+	
+	var changedTonic = []; //For I
+	if (currentMode === "major" || currentMode === "major+" || currentMode === "The Works") {
+		changedTonic = majTonic.slice();
+	} else if (currentMode === "minor" || currentMode === "minor+") {
+		changedTonic = minTonic.slice();
+	} else {
+		changedTonic = ["chord", 0, 0, 0, 0]; 
+	}
+	
+	var transposedTonic = changedTonic.map(function(item) { 
+		if (typeof item === "number") {
+			return item + changedKey;
+		} else {
+			return item;
+		}
+	});
+	
+	var changedPre = []; //For IV
+	if (currentMode === "major" || currentMode === "major+" || currentMode === "The Works") {
+		changedPre = majPre.slice();
+	} else if (currentMode === "minor" || currentMode === "minor+") {
+		changedPre = minPre.slice();
+	} else {
+		changedPre = ["chord", 0, 0, 0, 0]; 
+	}
+	
+	var transposedPre = changedPre.map(function(item) {
+		if (typeof item === "number") {
+			return item + changedKey;
+		} else {
+			return item;
+		}
+	});
+	
+	var changedDomV = domV.slice();
+	
+	var transposedDomV = changedDomV.map(function(item) {
+		if (typeof item === "number") {
+			return item + changedKey;
+		} else {
+			return item;
+		}
+	});
+	
+	
 	outlet (0, romanNumeralList);
-	outlet (1, [].concat.apply([],midiChordList));// Sends MIDI data out as MIDI numbers
+	outlet (1, transposedMidiList);// Sends MIDI data out as MIDI numbers
+	outlet (2, changedKey); //The new key
+	outlet (3, transposedMidiList[0]); // 1st Bass Note
+	outlet (4, transposedMidiList[3]); // 1st Soprano Note
+	outlet (5, transposedTonic);
+	outlet (6, transposedPre);
+	outlet (7, transposedDomV);
+	outlet (8, transposedTonic);
+	
+	post("MIDI Chord List: " + transposedMidiList+ "\n");
+
 }
