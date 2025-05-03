@@ -1982,18 +1982,21 @@ function generateChordList() {
 			2: ["V", "V7", "vii°6", "V6/5", "V4/3", "V4/2", "viiø7", "viiø6/5", "viiø4/3", "viiø4/2","vii°7", "vii°6/5", "vii°4/3", "vii°4/2", "V+"]
 		},
 		"Custom" : {
-			0: [],
-			1: [],
-			2: [],
+			0: ["I", "I6"],
+			1: ["IV"],
+			2: ["V", "V7"],
 		},
 	};
-	
-	function customList() {
+		
+function customList() { //Still in testing
 		var val = arrayfromargs(arguments);
-		  post("Received in inlet " + inlet + ": " + val.join(", ") + "\n");
+		
+		if (typeof val === "string") {
+			val = val.split(" ");
+		}
 		
 		val = val.filter(function(item) { //Removes extra emptys
-    		return item !== "empty";
+    		return item !== "empty" && item !=="" && item !== null
 		post(val);
 		});
 
@@ -2088,7 +2091,7 @@ function generateChordList() {
 		var num = chordList[i];
 		baseMode = currentMode; 
 		
-		if ((currentMode === "major+" || currentMode === "minor+" || currentMode === "The Works") && i >= 4) {
+		if (currentMode !== "Custom" && (currentMode === "major+" || currentMode === "minor+" || currentMode === "The Works") && i >= 4) {
 			if (currentMode === "major+" || (currentMode === "The Works" && Math.random() < 0.5)) {
 				baseMode = "major";
 			}else {
@@ -2106,6 +2109,23 @@ function generateChordList() {
 		if (i === 0) {
 			if (currentMode === "The Works") {
 				chosenRoman = (Math.random() < 0.5) ? "I" : "i";
+			} else if (currentMode === "Custom") { //For custom mode, it looks to see which roman numerals are selected to determine which tonic chord should start.
+				var customTonics = [];
+				var customRootChoices = chordOptions["Custom"][0];
+				
+				for (var j = 0; j < customRootChoices.length; j++) { //Looking through the array
+					if (customRootChoices[j] === "I") {
+						customTonics.push("I");
+					} else if (customRootChoices[j] === "i") {
+						customTonics.push("i");
+					}
+				}
+				
+				if (customTonics.length > 0) { //Choosing I or i, really only important if both are selected
+					chosenRoman = customTonics[Math.floor(Math.random() * customTonics.length)];
+				} else {
+					chosenRoman = customRootChoices[Math.floor(Math.random() * customRootChoices.length)];
+				}
 			} else {
 				chosenRoman = (currentMode === "major" || currentMode === "major+" ) ? "I" : "i"; // First chord is always root position tonic
 			}
@@ -2116,6 +2136,22 @@ function generateChordList() {
 					if (currentMode === "The Works") {
 						var tonicOptions = ["I", "i", "I6", "i6"];
 						chosenRoman = tonicOptions[Math.floor(Math.random() * tonicOptions.length)];
+					} else if (currentMode === "Custom") { //Same thing as above, just for last chord
+						var customRootChoices = chordOptions["Custom"][0];
+						var customFinalChoices = [];
+						
+						for (var j = 0; j < customRootChoices.length; j++) { //Looks to see which tonic chords were selected
+							var chord = customRootChoices[j];
+							if (chord === "I" || chord === "i" || chord === "I6" || chord === "i6") {
+								customFinalChoices.push(chord);
+							}
+						}
+						
+						if (customFinalChoices.length > 0) {
+							chosenRoman = customFinalChoices[Math.floor(Math.random() * customFinalChoices.length)];
+						} else {
+							chosenRoman = customRootChoices[Math.floor(Math.random() * customRootChoices.length)];
+						}
 					} else {
 			 			chosenRoman = Math.random() < 0.5 
 							? ((currentMode === "major" || currentMode === "major+") ? "I" : "i") //If mode is major, choose I, if minor choose i
@@ -2136,9 +2172,13 @@ function generateChordList() {
 							? (Math.random() < 0.5 ? "Cad6/4" : "Cad6/4(m)")
 							: options[Math.floor(Math.random() * options.length)];
 					} else {
-						chosenRoman = Math.random() < 0.3 
-							? ((currentMode === "major" || currentMode === "major+") ? "Cad6/4" : "Cad6/4(m)")
-							: options[Math.floor(Math.random() * options.length)];
+						if (currentMode === "Custom") {
+							chosenRoman = "Cad6/4";
+						} else {
+							chosenRoman = Math.random() < 0.3 
+								? ((currentMode === "major" || currentMode === "major+" || currentMode == "Custom") ? "Cad6/4" : "Cad6/4(m)")
+								: options[Math.floor(Math.random() * options.length)];
+							}
 						}
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman));
 			} else if (i === chordList.length - 2 && finalCadence [0] === 1) {
@@ -2146,7 +2186,7 @@ function generateChordList() {
 					if (currentMode === "The Works") {
 						chosenRoman = (Math.random() < 0.5 ? "IV" : "iv");
 					} else {
-						chosenRoman = (currentMode === "major" || currentMode === "major+") ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
+						chosenRoman = (currentMode === "major" || currentMode === "major+" || currentMode == "Custom") ? "IV" : "iv"; //Ensures Plagal if penultimate is 1
 					}
 				} while (chordPrevention(romanNumeralList[i - 1], chosenRoman)); 
 
@@ -2198,11 +2238,11 @@ function generateChordList() {
 		if (seventhChord === "V" || seventhChord === "V7") {
 			do {
 			eighthChord = Math.random() < 0.5 
-				? ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I" : "i")
- 				: ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I6" : "i6");
+				? ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works" || currentMode === "Custom") ? "I" : "i")
+ 				: ((currentMode === "major" || currentMode === "major+" || currentMode === "The Works" || currentMode === "Custom") ? "I6" : "i6");
 			} while (chordPrevention(romanNumeralList[6], eighthChord));
 		} else if (seventhChord === "V4/2") {
-			eighthChord = (currentMode === "major" || currentMode === "major+" || currentMode === "The Works") ? "I6" : "i6";
+			eighthChord = (currentMode === "major" || currentMode === "major+" || currentMode === "The Works" || currentMode === "Custom") ? "I6" : "i6";
 		}
 		
 		romanNumeralList[6] = seventhChord;
