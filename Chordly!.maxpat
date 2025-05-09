@@ -401,7 +401,7 @@
 									"patching_rect" : [ 588.0, 1346.0, 444.0, 77.0 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 74.0, 882.0, 1684.0, 42.0 ],
-									"text" : "Questions? Shoot me and email: johnenricodepetris@gmail.com",
+									"text" : "Questions? Send me an email: johnenricodepetris@gmail.com",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"textjustification" : 1
 								}
